@@ -15,804 +15,841 @@
     --text: #1a1a1a;
     --text-muted: #777770;
     --border: #e0e0d8;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Lato', sans-serif;
-    font-size: 17px;
-    font-weight: 300;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-
-  /* NAV */
-  nav {
-    padding: 22px 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-
-  .logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 22px;
-    color: var(--accent);
-    letter-spacing: -0.5px;
-  }
-
-  .logo span { color: var(--highlight); }
-
-  nav p {
-    font-size: 14px;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  /* HERO */
-  .hero {
-    background: var(--accent);
-    color: #fff;
-    padding: 80px 48px 72px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::after {
-    content: '';
-    position: absolute;
-    right: -60px;
-    top: -60px;
-    width: 400px;
-    height: 400px;
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 50%;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    right: 60px;
-    bottom: -80px;
-    width: 260px;
-    height: 260px;
-    border: 1px solid rgba(224,92,42,0.25);
-    border-radius: 50%;
-  }
-
-  .hero-tag {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--highlight);
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.1;
-    max-width: 640px;
-    margin-bottom: 20px;
-  }
-
-  .hero h1 em {
-    font-style: normal;
-    color: var(--highlight);
-  }
-
-  .hero p {
-    font-size: 17px;
-    color: rgba(255,255,255,0.65);
-    max-width: 480px;
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  /* MAIN CONTENT */
-  .main-wrap {
-    max-width: 780px;
-    margin: 0 auto;
-    padding: 60px 24px 80px;
-  }
-
-  /* PROGRESS BAR */
-  .progress-wrap {
-    margin-bottom: 48px;
-  }
-
-  .progress-label {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-  }
-
-  .progress-label span {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  .progress-label strong {
-    font-size: 13px;
-    color: var(--accent);
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-  }
-
-  .progress-track {
-    height: 3px;
-    background: var(--border);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: var(--highlight);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-
-  .steps-dots {
-    display: flex;
-    gap: 8px;
-    margin-top: 14px;
-    flex-wrap: wrap;
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--border);
-    transition: all 0.3s;
-  }
-
-  .dot.done { background: var(--highlight); }
-  .dot.active { background: var(--accent); transform: scale(1.4); }
-
-  .step-panel {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .step-panel.active { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .step-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    margin-bottom: 36px;
-    padding-bottom: 28px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .step-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .step-header-text h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 22px;
-    color: var(--accent);
-    margin-bottom: 4px;
-  }
-
-  .step-header-text p {
-    font-size: 15px;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  .field-group {
-    margin-bottom: 28px;
-  }
-
-  label {
-    display: block;
-    font-size: 15px;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-
-  label strong { font-weight: 700; }
-
-  input[type="text"],
-  input[type="number"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 13px 16px;
-    border: 1px solid var(--border);
-    background: var(--bg);
-    font-family: 'Lato', sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    color: var(--text);
-    border-radius: 4px;
-    transition: border-color 0.2s;
-    outline: none;
-    appearance: none;
-  }
-
-  input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
-
-  textarea {
-    resize: vertical;
-    min-height: 110px;
-    line-height: 1.5;
-  }
-
-  select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777770' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 40px;
-    cursor: pointer;
-  }
-
-  .options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 10px;
-  }
-
-  .options-grid.cols-2 {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .option-card {
-    position: relative;
-  }
-
-  .option-card input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .option-card label {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 400;
-    margin: 0;
-    transition: all 0.2s;
-    background: var(--bg);
-    user-select: none;
-  }
-
-  .option-card label:hover {
-    border-color: var(--accent2);
-    background: #f0f4ff;
-  }
-
-  .option-card input:checked + label {
-    border-color: var(--accent);
-    background: var(--accent);
-    color: #fff;
-  }
-
-  .option-icon { font-size: 16px; }
-
-  .number-input-wrap {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    max-width: 180px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .number-btn {
-    width: 44px;
-    height: 48px;
-    background: var(--bg2);
-    border: none;
-    cursor: pointer;
-    font-size: 20px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 300;
-    transition: background 0.2s;
-    flex-shrink: 0;
-  }
-
-  .number-btn:hover { background: var(--border); }
-
-  .number-input-wrap input[type="number"] {
-    border: none;
-    border-radius: 0;
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    font-family: 'Syne', sans-serif;
-    width: 80px;
-    padding: 8px 0;
-  }
-
-  .number-input-wrap input[type="number"]::-webkit-inner-spin-button,
-  .number-input-wrap input[type="number"]::-webkit-outer-spin-button { appearance: none; }
-
-  .conditional {
-    display: none;
-    margin-top: 20px;
-    padding: 20px;
-    background: var(--bg2);
-    border-left: 3px solid var(--accent2);
-    border-radius: 0 4px 4px 0;
-  }
-
-  .conditional.visible { display: block; }
-
-  .field-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 28px 0;
-  }
-
-  .field-hint {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-top: 6px;
-    font-weight: 400;
-  }
-
-  .nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 48px;
-    padding-top: 32px;
-    border-top: 1px solid var(--border);
-  }
-
-  .btn {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    padding: 14px 32px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-  }
-
-  .btn-secondary {
-    background: transparent;
-    color: var(--text-muted);
-    border: 1px solid var(--border);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #fff;
-  }
-
-  .btn-primary:hover {
-    background: var(--accent2);
-    transform: translateY(-1px);
-  }
-
-  .btn-generate {
-    background: var(--highlight);
-    color: #fff;
-    padding: 14px 40px;
-  }
-
-  .btn-generate:hover {
-    background: #c94d1f;
-    transform: translateY(-1px);
-  }
-
-  /* RESULT PAGE */
-  #result-page {
-    display: none;
-    padding: 0 0 80px;
-  }
-
-  .result-hero {
-    background: var(--accent);
-    color: #fff;
-    padding: 56px 48px;
-    margin-bottom: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    flex-wrap: wrap;
-  }
-
-  .result-hero h2 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 28px;
-    margin-bottom: 6px;
-  }
-
-  .result-hero p {
-    font-size: 15px;
-    color: rgba(255,255,255,0.6);
-    font-weight: 300;
-  }
-
-  .result-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-
-  .btn-export {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    padding: 12px 24px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.3);
-    background: transparent;
-    color: #fff;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-  }
-
-  .btn-export:hover { background: rgba(255,255,255,0.1); }
-
-  .btn-export-solid {
-    background: var(--highlight);
-    border-color: var(--highlight);
-  }
-
-  .btn-export-solid:hover { background: #c94d1f; border-color: #c94d1f; }
-
-  .result-content {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ORG CHART */
-  .org-wrap {
-    overflow-x: auto;
-    padding: 16px 0 32px;
-  }
-
-  .org-chart {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    min-width: 640px;
-  }
-
-  .org-ceo {
-    background: var(--accent);
-    color: #fff;
-    padding: 16px 40px;
-    border-radius: 4px;
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    text-align: center;
-    position: relative;
-    min-width: 200px;
-  }
-
-  .org-ceo .company-name {
-    font-size: 20px;
-    font-weight: 800;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .org-ceo .ceo-role {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(255,255,255,0.6);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-  }
-
-  .connector-v {
-    width: 2px;
-    height: 32px;
-    background: var(--border);
-    margin: 0 auto;
-  }
-
-  .dept-row {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-top: 32px;
-    position: relative;
-  }
-
-  .dept-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0;
-    position: relative;
-  }
-
-  .dept-col::before {
-    content: '';
-    width: 2px;
-    height: 32px;
-    background: var(--border);
-    display: block;
-  }
-
-  .dept-node {
-    border: 2px solid var(--accent);
-    background: var(--bg);
-    border-radius: 4px;
-    padding: 14px 22px;
-    text-align: center;
-    min-width: 150px;
-    max-width: 180px;
-  }
-
-  .dept-node .dept-icon {
-    font-size: 22px;
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  .dept-node .dept-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--accent);
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .dept-node .dept-count {
-    font-size: 12px;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    font-weight: 400;
-  }
-
-  .dept-node .dept-count::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    background: var(--highlight);
-    border-radius: 50%;
-  }
-
-  .subareas {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 0;
-    align-items: center;
-  }
-
-  .subarea-connector {
-    width: 2px;
-    height: 16px;
-    background: var(--border);
-  }
-
-  .subarea-node {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 8px 14px;
-    font-size: 13px;
-    color: var(--text-muted);
-    text-align: center;
-    min-width: 140px;
-    max-width: 170px;
-    font-weight: 400;
-  }
-
-  /* DIAGNÓSTICO PRINCIPAL */
-  .diagnostico-card {
-    background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
-    border-left: 5px solid var(--highlight);
-    border-radius: 8px;
-    padding: 28px 32px;
-    margin-bottom: 40px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
-  }
-
-  .diagnostico-card h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 18px;
-    color: var(--accent);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .diagnostico-card .dept-highlight {
-    background: var(--highlight);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 30px;
-    font-size: 14px;
-    display: inline-block;
-    margin: 12px 0 8px;
-  }
-
-  .diagnostico-card .razon {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-    margin: 12px 0 8px;
-  }
-
-  .diagnostico-card .sugerencia {
-    font-size: 15px;
-    color: var(--accent2);
-    background: #f0f4ff;
-    padding: 12px 16px;
-    border-radius: 6px;
-    margin-top: 12px;
-  }
-
-  .insights-section {
-    margin-top: 32px;
-  }
-
-  .insights-section h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--accent);
-    margin-bottom: 16px;
-  }
-
-  .insight-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 14px;
-  }
-
-  .insight-card {
-    background: var(--bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 18px 20px;
-  }
-
-  .insight-card .i-type {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 6px;
-  }
-
-  .insight-card .i-type.warn { color: #d97706; }
-  .insight-card .i-type.ok { color: #16a34a; }
-  .insight-card .i-type.tip { color: var(--accent2); }
-
-  .insight-card p {
-    font-size: 14px;
-    color: var(--text);
-    line-height: 1.5;
-    font-weight: 300;
-  }
-
-  .observations-box {
-    margin-top: 40px;
-    padding: 28px 32px;
-    background: var(--bg2);
-    border-left: 4px solid var(--highlight);
-    border-radius: 0 4px 4px 0;
-  }
-
-  .observations-box h3 {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--accent);
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .obs-tag {
-    display: inline-block;
-    background: var(--highlight);
-    color: #fff;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    border-radius: 2px;
-  }
-
-  .observations-box p {
-    font-size: 15px;
-    color: var(--text);
-    line-height: 1.65;
-    font-weight: 300;
-    white-space: pre-wrap;
-  }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 28px 48px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 60px;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-
-  footer p {
-    font-size: 13px;
-    color: var(--text-muted);
-    font-weight: 400;
-  }
-
-  footer a {
-    color: var(--highlight);
-    text-decoration: none;
-    font-weight: 700;
-  }
-
-  @media (max-width: 640px) {
-    nav, .hero, .result-hero, footer { padding-left: 20px; padding-right: 20px; }
-    .hero { padding-top: 52px; padding-bottom: 52px; }
-    .options-grid { grid-template-columns: 1fr; }
-    .options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-    .dept-row { gap: 10px; }
-    .dept-node { min-width: 120px; padding: 12px 14px; }
-  }
+    --step-active-bg: #1a1a2e;
+    --step-done-bg: #e05c2a;
+  }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: 'Lato', sans-serif;
+font-size: 17px;
+font-weight: 300;
+background: var(--bg);
+color: var(--text);
+min-height: 100vh;
+}
+
+/* NAV */
+nav {
+padding: 22px 48px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+border-bottom: 1px solid var(--border);
+background: var(--bg);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.logo {
+font-family: 'Syne', sans-serif;
+font-weight: 800;
+font-size: 22px;
+color: var(--accent);
+letter-spacing: -0.5px;
+}
+
+.logo span { color: var(--highlight); }
+
+nav p {
+font-size: 14px;
+color: var(--text-muted);
+font-weight: 400;
+}
+
+/* HERO */
+.hero {
+background: var(--accent);
+color: #fff;
+padding: 80px 48px 72px;
+position: relative;
+overflow: hidden;
+}
+
+.hero::after {
+content: '';
+position: absolute;
+right: -60px;
+top: -60px;
+width: 400px;
+height: 400px;
+border: 1px solid rgba(255,255,255,0.07);
+border-radius: 50%;
+}
+
+.hero::before {
+content: '';
+position: absolute;
+right: 60px;
+bottom: -80px;
+width: 260px;
+height: 260px;
+border: 1px solid rgba(224,92,42,0.25);
+border-radius: 50%;
+}
+
+.hero-tag {
+display: inline-block;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--highlight);
+margin-bottom: 20px;
+}
+
+.hero h1 {
+font-family: 'Syne', sans-serif;
+font-weight: 800;
+font-size: clamp(32px, 5vw, 52px);
+line-height: 1.1;
+max-width: 640px;
+margin-bottom: 20px;
+}
+
+.hero h1 em {
+font-style: normal;
+color: var(--highlight);
+}
+
+.hero p {
+font-size: 17px;
+color: rgba(255,255,255,0.65);
+max-width: 480px;
+line-height: 1.6;
+font-weight: 300;
+}
+
+/* MAIN CONTENT */
+.main-wrap {
+max-width: 780px;
+margin: 0 auto;
+padding: 60px 24px 80px;
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+margin-bottom: 48px;
+}
+
+.progress-label {
+display: flex;
+justify-content: space-between;
+margin-bottom: 10px;
+}
+
+.progress-label span {
+font-size: 13px;
+color: var(--text-muted);
+font-weight: 400;
+}
+
+.progress-label strong {
+font-size: 13px;
+color: var(--accent);
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+}
+
+.progress-track {
+height: 3px;
+background: var(--border);
+border-radius: 2px;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+background: var(--highlight);
+border-radius: 2px;
+transition: width 0.4s ease;
+}
+
+/* STEPS DOTS */
+.steps-dots {
+display: flex;
+gap: 8px;
+margin-top: 14px;
+flex-wrap: wrap;
+}
+
+.dot {
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: var(--border);
+transition: all 0.3s;
+}
+
+.dot.done { background: var(--highlight); }
+.dot.active { background: var(--accent); transform: scale(1.4); }
+
+/* STEP PANEL */
+.step-panel {
+display: none;
+animation: fadeIn 0.3s ease;
+}
+
+.step-panel.active { display: block; }
+
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(8px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+display: flex;
+align-items: flex-start;
+gap: 18px;
+margin-bottom: 36px;
+padding-bottom: 28px;
+border-bottom: 1px solid var(--border);
+}
+
+.step-icon {
+font-size: 28px;
+flex-shrink: 0;
+margin-top: 2px;
+}
+
+.step-header-text h2 {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 22px;
+color: var(--accent);
+margin-bottom: 4px;
+}
+
+.step-header-text p {
+font-size: 15px;
+color: var(--text-muted);
+font-weight: 400;
+}
+
+/* FIELDS */
+.field-group {
+margin-bottom: 28px;
+}
+
+label {
+display: block;
+font-size: 15px;
+font-weight: 400;
+color: var(--text);
+margin-bottom: 10px;
+}
+
+label strong { font-weight: 700; }
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+width: 100%;
+padding: 13px 16px;
+border: 1px solid var(--border);
+background: var(--bg);
+font-family: 'Lato', sans-serif;
+font-size: 16px;
+font-weight: 300;
+color: var(--text);
+border-radius: 4px;
+transition: border-color 0.2s;
+outline: none;
+appearance: none;
+}
+
+input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
+
+textarea {
+resize: vertical;
+min-height: 110px;
+line-height: 1.5;
+}
+
+select {
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777770' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 14px center;
+padding-right: 40px;
+cursor: pointer;
+}
+
+/* RADIO / CHECK GRID */
+.options-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+gap: 10px;
+}
+
+.options-grid.cols-2 {
+grid-template-columns: 1fr 1fr;
+}
+
+.option-card {
+position: relative;
+}
+
+.option-card input {
+position: absolute;
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.option-card label {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 12px 16px;
+border: 1px solid var(--border);
+border-radius: 4px;
+cursor: pointer;
+font-size: 15px;
+font-weight: 400;
+margin: 0;
+transition: all 0.2s;
+background: var(--bg);
+user-select: none;
+}
+
+.option-card label:hover {
+border-color: var(--accent2);
+background: #f0f4ff;
+}
+
+.option-card input:checked + label {
+border-color: var(--accent);
+background: var(--accent);
+color: #fff;
+}
+
+.option-icon {
+font-size: 16px;
+}
+
+/* NUMBER INPUT STYLED */
+.number-input-wrap {
+display: flex;
+align-items: center;
+gap: 0;
+max-width: 180px;
+border: 1px solid var(--border);
+border-radius: 4px;
+overflow: hidden;
+}
+
+.number-btn {
+width: 44px;
+height: 48px;
+background: var(--bg2);
+border: none;
+cursor: pointer;
+font-size: 20px;
+color: var(--text);
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 300;
+transition: background 0.2s;
+flex-shrink: 0;
+}
+
+.number-btn:hover { background: var(--border); }
+
+.number-input-wrap input[type="number"] {
+border: none;
+border-radius: 0;
+text-align: center;
+font-size: 18px;
+font-weight: 700;
+font-family: 'Syne', sans-serif;
+width: 80px;
+padding: 8px 0;
+}
+
+.number-input-wrap input[type="number"]::-webkit-inner-spin-button,
+.number-input-wrap input[type="number"]::-webkit-outer-spin-button { appearance: none; }
+
+/* CONDITIONAL SECTION */
+.conditional {
+display: none;
+margin-top: 20px;
+padding: 20px;
+background: var(--bg2);
+border-left: 3px solid var(--accent2);
+border-radius: 0 4px 4px 0;
+}
+
+.conditional.visible { display: block; }
+
+/* DIVIDER */
+.field-divider {
+height: 1px;
+background: var(--border);
+margin: 28px 0;
+}
+
+/* HINT */
+.field-hint {
+font-size: 13px;
+color: var(--text-muted);
+margin-top: 6px;
+font-weight: 400;
+}
+
+/* NAV BUTTONS */
+.nav-buttons {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 48px;
+padding-top: 32px;
+border-top: 1px solid var(--border);
+}
+
+.btn {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 15px;
+padding: 14px 32px;
+border-radius: 4px;
+cursor: pointer;
+border: none;
+transition: all 0.2s;
+letter-spacing: 0.3px;
+}
+
+.btn-secondary {
+background: transparent;
+color: var(--text-muted);
+border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+border-color: var(--accent);
+color: var(--accent);
+}
+
+.btn-primary {
+background: var(--accent);
+color: #fff;
+}
+
+.btn-primary:hover {
+background: var(--accent2);
+transform: translateY(-1px);
+}
+
+.btn-generate {
+background: var(--highlight);
+color: #fff;
+padding: 14px 40px;
+}
+
+.btn-generate:hover {
+background: #c94d1f;
+transform: translateY(-1px);
+}
+
+/* ============ RESULT PAGE ============ */
+#result-page {
+display: none;
+padding: 0 0 80px;
+}
+
+.result-hero {
+background: var(--accent);
+color: #fff;
+padding: 56px 48px;
+margin-bottom: 48px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 24px;
+flex-wrap: wrap;
+}
+
+.result-hero h2 {
+font-family: 'Syne', sans-serif;
+font-weight: 800;
+font-size: 28px;
+margin-bottom: 6px;
+}
+
+.result-hero p {
+font-size: 15px;
+color: rgba(255,255,255,0.6);
+font-weight: 300;
+}
+
+.result-actions {
+display: flex;
+gap: 12px;
+flex-wrap: wrap;
+}
+
+.btn-export {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 14px;
+padding: 12px 24px;
+border-radius: 4px;
+cursor: pointer;
+border: 1px solid rgba(255,255,255,0.3);
+background: transparent;
+color: #fff;
+transition: all 0.2s;
+letter-spacing: 0.3px;
+}
+
+.btn-export:hover { background: rgba(255,255,255,0.1); }
+
+.btn-export-solid {
+background: var(--highlight);
+border-color: var(--highlight);
+}
+
+.btn-export-solid:hover { background: #c94d1f; border-color: #c94d1f; }
+
+.result-content {
+max-width: 960px;
+margin: 0 auto;
+padding: 0 24px;
+}
+
+/* ORGCHART */
+.org-wrap {
+overflow-x: auto;
+padding: 16px 0 32px;
+}
+
+.org-chart {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0;
+min-width: 640px;
+}
+
+.org-ceo {
+background: var(--accent);
+color: #fff;
+padding: 16px 40px;
+border-radius: 4px;
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 16px;
+text-align: center;
+position: relative;
+min-width: 200px;
+}
+
+.org-ceo .company-name {
+font-size: 20px;
+font-weight: 800;
+display: block;
+margin-bottom: 2px;
+}
+
+.org-ceo .ceo-role {
+font-size: 12px;
+font-weight: 400;
+color: rgba(255,255,255,0.6);
+letter-spacing: 1.5px;
+text-transform: uppercase;
+}
+
+.connector-v {
+width: 2px;
+height: 32px;
+background: var(--border);
+margin: 0 auto;
+}
+
+.dept-row {
+display: flex;
+gap: 16px;
+justify-content: center;
+flex-wrap: wrap;
+padding-top: 32px;
+position: relative;
+}
+
+.dept-col {
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 0;
+position: relative;
+}
+
+.dept-col::before {
+content: '';
+width: 2px;
+height: 32px;
+background: var(--border);
+display: block;
+}
+
+.dept-node {
+border: 2px solid var(--accent);
+background: var(--bg);
+border-radius: 4px;
+padding: 14px 22px;
+text-align: center;
+min-width: 150px;
+max-width: 180px;
+}
+
+.dept-node .dept-icon {
+font-size: 22px;
+display: block;
+margin-bottom: 6px;
+}
+
+.dept-node .dept-name {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 14px;
+color: var(--accent);
+display: block;
+margin-bottom: 4px;
+}
+
+.dept-node .dept-count {
+font-size: 12px;
+color: var(--text-muted);
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 4px;
+font-weight: 400;
+}
+
+.dept-node .dept-count::before {
+content: '';
+display: inline-block;
+width: 6px;
+height: 6px;
+background: var(--highlight);
+border-radius: 50%;
+}
+
+.subareas {
+display: flex;
+flex-direction: column;
+gap: 8px;
+margin-top: 0;
+align-items: center;
+}
+
+.subarea-connector {
+width: 2px;
+height: 16px;
+background: var(--border);
+}
+
+.subarea-node {
+background: var(--bg2);
+border: 1px solid var(--border);
+border-radius: 4px;
+padding: 8px 14px;
+font-size: 13px;
+color: var(--text-muted);
+text-align: center;
+min-width: 140px;
+max-width: 170px;
+font-weight: 400;
+}
+
+/* INSIGHTS */
+.insights-section {
+margin-top: 32px;
+}
+
+.insights-section h3 {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 16px;
+color: var(--accent);
+margin-bottom: 16px;
+}
+
+.insight-cards {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+gap: 14px;
+}
+
+.insight-card {
+background: var(--bg);
+border: 1px solid var(--border);
+border-radius: 4px;
+padding: 18px 20px;
+}
+
+.insight-card .i-type {
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+margin-bottom: 6px;
+}
+
+.insight-card .i-type.warn { color: #d97706; }
+.insight-card .i-type.ok { color: #16a34a; }
+.insight-card .i-type.tip { color: var(--accent2); }
+
+.insight-card p {
+font-size: 14px;
+color: var(--text);
+line-height: 1.5;
+font-weight: 300;
+}
+
+/* OBSERVATIONS */
+.observations-box {
+margin-top: 40px;
+padding: 28px 32px;
+background: var(--bg2);
+border-left: 4px solid var(--highlight);
+border-radius: 0 4px 4px 0;
+}
+
+.observations-box h3 {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 16px;
+color: var(--accent);
+margin-bottom: 12px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+
+.obs-tag {
+display: inline-block;
+background: var(--highlight);
+color: #fff;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+padding: 2px 8px;
+border-radius: 2px;
+}
+
+.observations-box p {
+font-size: 15px;
+color: var(--text);
+line-height: 1.65;
+font-weight: 300;
+white-space: pre-wrap;
+}
+
+/* PROMPT BOX (nuevo, pero con estilos existentes) */
+.prompt-box {
+margin-top: 40px;
+padding: 24px;
+background: var(--bg2);
+border-radius: 4px;
+border: 1px solid var(--border);
+}
+.prompt-box h3 {
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+font-size: 16px;
+color: var(--accent);
+margin-bottom: 12px;
+}
+.prompt-box textarea {
+width: 100%;
+font-family: monospace;
+font-size: 13px;
+background: #1e1e1e;
+color: #d4d4d4;
+padding: 16px;
+border-radius: 6px;
+border: none;
+}
+.prompt-box button {
+margin-top: 12px;
+background: var(--accent);
+color: white;
+border: none;
+padding: 8px 20px;
+border-radius: 30px;
+cursor: pointer;
+font-family: 'Syne', sans-serif;
+font-weight: 700;
+}
+
+/* DIAGNOSTICO CARD */
+.diagnostico-card {
+background: #fff8f0;
+border-left: 5px solid var(--highlight);
+border-radius: 8px;
+padding: 24px;
+margin: 30px 0;
+}
+.diagnostico-card h3 {
+font-family: 'Syne', sans-serif;
+font-weight: 800;
+font-size: 18px;
+color: var(--accent);
+margin-bottom: 12px;
+}
+.dept-highlight {
+background: var(--highlight);
+color: white;
+padding: 4px 12px;
+border-radius: 30px;
+display: inline-block;
+margin: 10px 0;
+}
+.sugerencia {
+background: #f0f4ff;
+padding: 12px 16px;
+border-radius: 6px;
+margin-top: 12px;
+color: var(--accent2);
+}
+
+/* FOOTER */
+footer {
+border-top: 1px solid var(--border);
+padding: 28px 48px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 60px;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+footer p {
+font-size: 13px;
+color: var(--text-muted);
+font-weight: 400;
+}
+
+footer a {
+color: var(--highlight);
+text-decoration: none;
+font-weight: 700;
+}
+
+@media (max-width: 640px) {
+nav, .hero, .result-hero, footer { padding-left: 20px; padding-right: 20px; }
+.hero { padding-top: 52px; padding-bottom: 52px; }
+.options-grid { grid-template-columns: 1fr; }
+.options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+.dept-row { gap: 10px; }
+.dept-node { min-width: 120px; padding: 12px 14px; }
+}
 </style>
 </head>
 <body>
@@ -832,16 +869,16 @@
 
   <div class="progress-wrap">
     <div class="progress-label">
-      <span id="step-label">Paso 1 de 9</span>
+      <span id="step-label">Paso 1 de 12</span>
       <strong id="step-name-label">Información general</strong>
     </div>
     <div class="progress-track">
-      <div class="progress-fill" id="progress-fill" style="width: 11%"></div>
+      <div class="progress-fill" id="progress-fill" style="width: 8%"></div>
     </div>
     <div class="steps-dots" id="steps-dots"></div>
   </div>
 
-  <!-- STEP 1 -->
+  <!-- ==================== STEP 1: INFO GENERAL ==================== -->
   <div class="step-panel active" data-step="1">
     <div class="step-header">
       <div class="step-icon">🏢</div>
@@ -874,7 +911,7 @@
     </div>
   </div>
 
-  <!-- STEP 2 -->
+  <!-- ==================== STEP 2: DIRECCIÓN ==================== -->
   <div class="step-panel" data-step="2">
     <div class="step-header"><div class="step-icon">🧠</div><div class="step-header-text"><h2>Dirección y management</h2><p>Quién conduce y cómo se toman decisiones.</p></div></div>
     <div class="field-group">
@@ -898,7 +935,7 @@
     </div>
   </div>
 
-  <!-- STEP 3 -->
+  <!-- ==================== STEP 3: MARKETING ==================== -->
   <div class="step-panel" data-step="3">
     <div class="step-header"><div class="step-icon">📣</div><div class="step-header-text"><h2>Marketing y atracción</h2><p>Cómo la empresa llega a sus clientes potenciales.</p></div></div>
     <div class="field-group">
@@ -939,7 +976,7 @@
     </div>
   </div>
 
-  <!-- STEP 4 -->
+  <!-- ==================== STEP 4: VENTAS ==================== -->
   <div class="step-panel" data-step="4">
     <div class="step-header"><div class="step-icon">💰</div><div class="step-header-text"><h2>Ventas y conversión</h2><p>Cómo la empresa cierra negocios.</p></div></div>
     <div class="field-group">
@@ -978,7 +1015,7 @@
     </div>
   </div>
 
-  <!-- STEP 5 -->
+  <!-- ==================== STEP 5: OPERACIONES ==================== -->
   <div class="step-panel" data-step="5">
     <div class="step-header"><div class="step-icon">⚙️</div><div class="step-header-text"><h2>Operaciones</h2><p>El corazón de cómo se entrega el producto o servicio.</p></div></div>
     <div class="field-group">
@@ -1023,7 +1060,7 @@
     </div>
   </div>
 
-  <!-- STEP 6 -->
+  <!-- ==================== STEP 6: LOGISTICA ==================== -->
   <div class="step-panel" data-step="6">
     <div class="step-header"><div class="step-icon">📦</div><div class="step-header-text"><h2>Logística y distribución</h2><p>Movimiento físico de productos o materiales, si aplica.</p></div></div>
     <div class="field-group">
@@ -1052,7 +1089,7 @@
     </div>
   </div>
 
-  <!-- STEP 7 -->
+  <!-- ==================== STEP 7: ADMINISTRACIÓN ==================== -->
   <div class="step-panel" data-step="7">
     <div class="step-header"><div class="step-icon">🧾</div><div class="step-header-text"><h2>Administración y finanzas</h2><p>La columna vertebral financiera y operativa.</p></div></div>
     <div class="field-group">
@@ -1091,7 +1128,7 @@
     </div>
   </div>
 
-  <!-- STEP 8 -->
+  <!-- ==================== STEP 8: POSTVENTA ==================== -->
   <div class="step-panel" data-step="8">
     <div class="step-header"><div class="step-icon">🤝</div><div class="step-header-text"><h2>Post-venta y atención al cliente</h2><p>Cómo se mantiene la relación con el cliente después de la venta.</p></div></div>
     <div class="field-group">
@@ -1129,9 +1166,9 @@
     </div>
   </div>
 
-  <!-- STEP 9 -->
+  <!-- ==================== STEP 9: DESAFÍO PRINCIPAL (original) ==================== -->
   <div class="step-panel" data-step="9">
-    <div class="step-header"><div class="step-icon">🎯</div><div class="step-header-text"><h2>Tu desafío principal</h2><p>Este último paso es el más importante. Nos ayuda a personalizar el resultado.</p></div></div>
+    <div class="step-header"><div class="step-icon">🎯</div><div class="step-header-text"><h2>Tu desafío principal</h2><p>¿Cuál es el problema que querés resolver?</p></div></div>
     <div class="field-group">
       <label><strong>¿Cuál es el principal problema que querés resolver con este organigrama?</strong></label>
       <div class="options-grid">
@@ -1150,11 +1187,99 @@
     </div>
   </div>
 
+  <!-- ==================== NUEVO PASO 10: MULTISUCURSAL Y GEOGRAFÍA ==================== -->
+  <div class="step-panel" data-step="10">
+    <div class="step-header"><div class="step-icon">🌍</div><div class="step-header-text"><h2>Estructura geográfica</h2><p>Países, sedes y niveles de gestión</p></div></div>
+    <div class="field-group">
+      <label><strong>Países donde opera</strong></label>
+      <input type="text" id="paises" placeholder="Ej: Paraguay, Argentina">
+    </div>
+    <div class="field-group">
+      <label><strong>Cantidad total de sedes / sucursales</strong></label>
+      <div class="number-input-wrap">
+        <button class="number-btn" onclick="changeNum('sedes',-1)" aria-label="Decrementar">−</button>
+        <input type="number" id="sedes" value="1" min="1">
+        <button class="number-btn" onclick="changeNum('sedes',1)" aria-label="Incrementar">+</button>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>¿Hay un gerente o responsable por país?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="gerente_pais" id="gp_si" value="si"><label for="gp_si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="gerente_pais" id="gp_no" value="no"><label for="gp_no">❌ No, solo el dueño</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>¿Hay gerente por cada sede?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="gerente_sede" id="gs_si" value="si"><label for="gs_si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="gerente_sede" id="gs_no" value="no"><label for="gs_no">❌ No</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>Personal administrativo por país (aproximado)</strong></label>
+      <div class="number-input-wrap">
+        <button class="number-btn" onclick="changeNum('adm_pais',-1)" aria-label="Decrementar">−</button>
+        <input type="number" id="adm_pais" value="0" min="0">
+        <button class="number-btn" onclick="changeNum('adm_pais',1)" aria-label="Incrementar">+</button>
+      </div>
+      <div class="field-hint">Personas que realizan tareas administrativas (finanzas, RRHH, etc.) en cada país.</div>
+    </div>
+  </div>
+
+  <!-- ==================== NUEVO PASO 11: HERRAMIENTAS TECNOLÓGICAS ==================== -->
+  <div class="step-panel" data-step="11">
+    <div class="step-header"><div class="step-icon">🛠️</div><div class="step-header-text"><h2>Software y herramientas</h2><p>CRM, gestión, facturación, comunicación</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Qué software de gestión usan? (ej: GimnasioPro, Virtuagym, etc.)</strong></label>
+      <input type="text" id="soft_gym" placeholder="Nombre o 'ninguno'">
+    </div>
+    <div class="field-group">
+      <label><strong>¿Qué CRM usan para clientes? (ej: HubSpot, ManyChat, etc.)</strong></label>
+      <input type="text" id="soft_crm" placeholder="Nombre o 'ninguno'">
+    </div>
+    <div class="field-group">
+      <label><strong>¿Qué sistema de facturación / contabilidad?</strong></label>
+      <input type="text" id="soft_facturacion" placeholder="Ej: QuickBooks, Excel, etc.">
+    </div>
+    <div class="field-group">
+      <label><strong>¿Usan herramientas de comunicación interna? (Slack, WhatsApp Business, Teams)</strong></label>
+      <input type="text" id="soft_comunicacion" placeholder="Ej: Slack, WhatsApp Business">
+    </div>
+    <div class="field-group">
+      <label><strong>Nivel de uso de estas herramientas</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="nivel_soft" id="soft_bien" value="bien"><label for="soft_bien">✅ Se usan bien y están integradas</label></div>
+        <div class="option-card"><input type="radio" name="nivel_soft" id="soft_parcial" value="parcial"><label for="soft_parcial">⚠️ Se usan parcialmente o mal</label></div>
+        <div class="option-card"><input type="radio" name="nivel_soft" id="soft_no" value="no"><label for="soft_no">❌ No se usan o no sirven</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== NUEVO PASO 12: CAUSA RAÍZ Y RELATO EXTENDIDO ==================== -->
+  <div class="step-panel" data-step="12">
+    <div class="step-header"><div class="step-icon">🔍</div><div class="step-header-text"><h2>Causa raíz y contexto</h2><p>¿Por qué creés que ocurre el problema?</p></div></div>
+    <div class="field-group">
+      <label><strong>En el área con problemas, ¿qué creés que falla principalmente?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="causa_raiz" id="cr_personas" value="personas"><label for="cr_personas">👥 Las personas no saben o no hacen bien su tarea</label></div>
+        <div class="option-card"><input type="radio" name="causa_raiz" id="cr_proceso" value="proceso"><label for="cr_proceso">📋 Los procesos no están claros o no se cumplen</label></div>
+        <div class="option-card"><input type="radio" name="causa_raiz" id="cr_herramientas" value="herramientas"><label for="cr_herramientas">🛠️ Falta o mal uso de herramientas tecnológicas</label></div>
+        <div class="option-card"><input type="radio" name="causa_raiz" id="cr_ambos" value="ambos"><label for="cr_ambos">🔀 Combinación de varios</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>Contame con detalle la situación de tu negocio y los problemas (opcional pero muy útil)</strong></label>
+      <textarea id="relato_libre" rows="5" placeholder="Ej: Tengo 3 sedes en Paraguay y 4 en Argentina. Cada país tiene su administradora. Los profesores coordinan horarios pero hay cruces. La dueña controla el dinero personalmente..."></textarea>
+      <p class="field-hint">Esto se incluirá en el prompt para la IA y en las observaciones finales.</p>
+    </div>
+  </div>
+
   <div class="nav-buttons">
     <button class="btn btn-secondary" id="btn-prev" onclick="prevStep()" style="display:none">← Atrás</button>
     <div></div>
     <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Continuar →</button>
-    <button class="btn btn-generate" id="btn-generate" onclick="generateOrg()" style="display:none">Generar organigrama →</button>
+    <button class="btn btn-generate" id="btn-generate" onclick="generateOrg()" style="display:none">Generar organigrama + diagnóstico →</button>
   </div>
 </div>
 
@@ -1175,6 +1300,11 @@
     </div>
     <div id="diagnostico-container"></div>
     <div class="insights-section" id="insights-section"></div>
+    <div class="prompt-box" id="prompt-box" style="display: none;">
+      <h3>📋 Prompt para IA (Grok / ChatGPT)</h3>
+      <textarea id="prompt-ia" rows="10" readonly></textarea>
+      <button onclick="copyPrompt()">Copiar prompt</button>
+    </div>
     <div class="observations-box" id="observations-box" style="display:none">
       <h3><span class="obs-tag">Observaciones del cliente</span></h3>
       <p id="observations-text"></p>
@@ -1190,8 +1320,11 @@
 <script>
   // ============ STATE ============
   let currentStep = 1;
-  const totalSteps = 9;
-  const stepNames = ["Información general","Dirección","Marketing","Ventas","Operaciones","Logística","Administración","Post-venta","Tu desafío"];
+  const totalSteps = 12;
+  const stepNames = [
+    "Información general","Dirección","Marketing","Ventas","Operaciones","Logística",
+    "Administración","Post-venta","Tu desafío","Multisucursal","Herramientas","Causa raíz"
+  ];
 
   function initDots() {
     const wrap = document.getElementById('steps-dots');
@@ -1222,7 +1355,6 @@
   }
 
   function nextStep() {
-    // Validación paso 1
     if (currentStep === 1) {
       const nombre = document.getElementById('empresa-nombre').value.trim();
       const rubro = document.getElementById('empresa-rubro').value.trim();
@@ -1252,6 +1384,7 @@
     if (section) section.classList.toggle('visible', selected === showValue);
   }
 
+  // ============ RECOLECCIÓN COMPLETA DE DATOS ============
   function collectData() {
     const d = {};
     d.nombre = document.getElementById('empresa-nombre').value.trim() || 'Mi Empresa';
@@ -1286,120 +1419,118 @@
     const prob = document.querySelector('input[name="problema"]:checked');
     d.problema = prob ? prob.value : '';
     d.obsLibre = document.getElementById('obs-libre').value.trim();
+
+    // NUEVOS CAMPOS
+    d.paises = document.getElementById('paises').value.trim();
+    d.sedes = Math.max(1, parseInt(document.getElementById('sedes').value) || 1);
+    d.gerente_pais = document.querySelector('input[name="gerente_pais"]:checked')?.value || 'no';
+    d.gerente_sede = document.querySelector('input[name="gerente_sede"]:checked')?.value || 'no';
+    d.adm_pais = Math.max(0, parseInt(document.getElementById('adm_pais').value) || 0);
+    d.soft_gym = document.getElementById('soft_gym').value.trim();
+    d.soft_crm = document.getElementById('soft_crm').value.trim();
+    d.soft_facturacion = document.getElementById('soft_facturacion').value.trim();
+    d.soft_comunicacion = document.getElementById('soft_comunicacion').value.trim();
+    d.nivel_soft = document.querySelector('input[name="nivel_soft"]:checked')?.value || '';
+    d.causa_raiz = document.querySelector('input[name="causa_raiz"]:checked')?.value || '';
+    d.relato_libre = document.getElementById('relato_libre').value.trim();
     return d;
   }
 
-  // ============ DIAGNÓSTICO INTELIGENTE POR DEPARTAMENTO ============
+  // ============ DIAGNÓSTICO MEJORADO ============
   function diagnosticarProblemas(d) {
     let problemas = [];
 
-    // 1. Ventas
-    if (d.tieneVentas === 'no' && d.totalEmpleados > 3) {
-      problemas.push({
-        dept: 'Ventas',
-        gravedad: 'alta',
-        razon: 'No hay equipo de ventas formal para el tamaño actual de la empresa.',
-        sugerencia: 'Designá al menos una persona responsable de ventas. Documentá un proceso básico (prospección → oferta → cierre).'
-      });
-    } else if (d.tieneVentas === 'si' && d.procesoVentas && (d.procesoVentas === 'informal' || d.procesoVentas === 'no')) {
-      problemas.push({
-        dept: 'Ventas',
-        gravedad: 'media',
-        razon: 'El equipo de ventas trabaja sin un proceso documentado.',
-        sugerencia: 'Creá un pipeline simple con etapas: contacto → calificación → propuesta → cierre → seguimiento.'
-      });
-    } else if (d.tieneVentas === 'si' && d.ventasPersonas === 1 && d.totalEmpleados > 5) {
-      problemas.push({
-        dept: 'Ventas',
-        gravedad: 'media',
-        razon: 'Un solo vendedor para una empresa de más de 5 personas puede ser insuficiente.',
-        sugerencia: 'Evaluá sumar un asistente de ventas o externalizar la prospección.'
-      });
-    }
+    // Detectar departamento con problema basado en respuestas (simplificado)
+    let areaProblema = null;
+    if (d.tieneVentas === 'no' && d.totalEmpleados > 3) areaProblema = 'Ventas';
+    else if (d.haceMkt === 'no' && d.totalEmpleados > 2) areaProblema = 'Marketing';
+    else if (d.opPersonas === 1 && d.totalEmpleados > 5) areaProblema = 'Operaciones';
+    else if (d.admPersonas === 0 && d.totalEmpleados > 3) areaProblema = 'Administración';
+    else if (d.tienePostventa === 'no' && d.totalEmpleados > 3) areaProblema = 'Post-venta';
+    else if (d.hayJerarquia === 'no' || d.hayJerarquia === 'informal') areaProblema = 'Dirección';
+    else areaProblema = d.problema || 'Estructura general';
 
-    // 2. Marketing
-    if (d.haceMkt === 'no' && d.totalEmpleados > 2) {
-      problemas.push({
-        dept: 'Marketing',
-        gravedad: 'media',
-        razon: 'No hay acciones de marketing para atraer clientes.',
-        sugerencia: 'Destiná al menos 2-4 horas semanales a redes sociales o email marketing. O contratá una agencia pequeña.'
-      });
-    } else if (d.haceMkt === 'si' && d.mktPersonas === 0 && d.totalEmpleados > 4) {
-      problemas.push({
-        dept: 'Marketing',
-        gravedad: 'media',
-        razon: 'Hacés marketing pero nadie está formalmente asignado.',
-        sugerencia: 'Designá un responsable de marketing (aunque sea part-time). La consistencia es clave.'
-      });
-    }
+    let causa = d.causa_raiz;
+    let sugerencia = '';
+    if (causa === 'personas') sugerencia = 'Evaluar competencias, definir KPIs y establecer feedback continuo. Capacitar o reasignar roles.';
+    else if (causa === 'proceso') sugerencia = 'Diseñar flujos de trabajo documentados. Implementar reuniones de seguimiento semanales.';
+    else if (causa === 'herramientas') sugerencia = 'Auditar el software actual, capacitar al equipo o migrar a una herramienta más adecuada.';
+    else sugerencia = 'Realizar un análisis detallado del área para identificar la causa raíz exacta.';
 
-    // 3. Operaciones
-    if (d.opPersonas === 1 && (d.ventasPersonas > 2 || d.totalEmpleados > 6)) {
-      problemas.push({
-        dept: 'Operaciones',
-        gravedad: 'alta',
-        razon: 'Una sola persona en operaciones no puede dar abasto con el volumen actual.',
-        sugerencia: 'Evaluá contratar asistente operativo o automatizar tareas repetitivas (agendas, facturación).'
-      });
-    } else if (d.opPersonas === 0 && d.totalEmpleados > 2) {
-      problemas.push({
-        dept: 'Operaciones',
-        gravedad: 'alta',
-        razon: 'No hay nadie dedicado a operaciones, puede generar demoras y errores.',
-        sugerencia: 'Asigná una persona como responsable de entregas / producción, aunque sea compartido.'
-      });
-    }
-
-    // 4. Administración
-    if (d.admPersonas === 0 && d.totalEmpleados > 3) {
-      problemas.push({
-        dept: 'Administración',
-        gravedad: 'media',
-        razon: 'No hay gestión administrativa dedicada. El dueño probablemente pierde tiempo en tareas operativas.',
-        sugerencia: 'Implementá herramientas de facturación (ej. Alegra, Contpaqi) y delegá cobros/pagos a un asistente.'
-      });
-    } else if (d.admPersonas === 1 && d.totalEmpleados > 8) {
-      problemas.push({
-        dept: 'Administración',
-        gravedad: 'media',
-        razon: 'Una sola persona administrando todo puede ser cuello de botella.',
-        sugerencia: 'Revisá si podés tercerizar liquidaciones o sumar un software de RRHH.'
-      });
-    }
-
-    // 5. Post-venta
-    if (d.tienePostventa === 'no' && d.totalEmpleados > 3) {
-      problemas.push({
-        dept: 'Post-venta',
-        gravedad: 'baja',
-        razon: 'No hay seguimiento post-venta, se pierde oportunidad de recompra y referidos.',
-        sugerencia: 'Creá un flujo simple: email de agradecimiento, encuesta de satisfacción y pedido de reseña.'
-      });
-    }
-
-    // 6. Jerarquía
-    if (d.hayJerarquia === 'no' || d.hayJerarquia === 'informal') {
-      problemas.push({
-        dept: 'Dirección',
-        gravedad: 'alta',
-        razon: 'La estructura jerárquica es informal o inexistente. Nadie sabe a quién reportar.',
-        sugerencia: 'Definí organigrama simple con 3-4 áreas y comunicá las líneas de reporte a todo el equipo.'
-      });
-    }
-
-    if (problemas.length === 0) {
-      return { principal: null, mensaje: '✅ ¡Excelente! La estructura parece equilibrada. Seguí monitoreando a medida que crezcas.' };
-    }
-
-    const prioridad = { alta: 3, media: 2, baja: 1 };
-    problemas.sort((a,b) => prioridad[b.gravedad] - prioridad[a.gravedad]);
-    const principal = problemas[0];
-
-    return { principal: principal.dept, razon: principal.razon, sugerencia: principal.sugerencia, todos: problemas };
+    return { area: areaProblema, causa: causa, sugerencia: sugerencia };
   }
 
-  // ============ BUILD DEPARTMENTS ============
+  // ============ CONSTRUCCIÓN DEL PROMPT ============
+  function buildPrompt(d, diagnostico) {
+    return `Eres un consultor organizacional experto en PyMEs y cadenas de gimnasios. Basado en los siguientes datos, genera un informe ejecutivo con:
+
+1. Los 3 principales cuellos de botella (indicando si son de PERSONAS, PROCESOS o HERRAMIENTAS).
+2. Para cada uno, una solución concreta y priorizada.
+3. Un organigrama recomendado (describir roles y jerarquías).
+4. Recomendaciones específicas sobre herramientas tecnológicas (CRM, software de gestión).
+5. Pasos para documentar procesos críticos y poder escalar.
+
+DATOS DE LA EMPRESA:
+- Nombre: ${d.nombre}
+- Rubro: ${d.rubro}
+- Países: ${d.paises || 'No especificado'}
+- Sedes: ${d.sedes}
+- Empleados totales: ${d.totalEmpleados}
+- Tipo de negocio: ${d.tipoNegocio}
+- Quién decide: ${d.decisionMaker}
+- Jerarquía actual: ${d.hayJerarquia}
+- Marketing activo: ${d.haceMkt} (personas: ${d.mktPersonas})
+- Ventas: ${d.tieneVentas} (personas: ${d.ventasPersonas}, proceso: ${d.procesoVentas || 'no definido'})
+- Operaciones: ${d.opPersonas} personas
+- Logística: ${d.hayLogistica} (personas: ${d.logPersonas})
+- Administración: ${d.admPersonas} personas (quien: ${d.quienAdmin})
+- Post-venta: ${d.tienePostventa} (personas: ${d.pvPersonas})
+- Software gestión: ${d.soft_gym || 'ninguno'}
+- CRM: ${d.soft_crm || 'ninguno'}
+- Facturación: ${d.soft_facturacion || 'ninguno'}
+- Comunicación interna: ${d.soft_comunicacion || 'ninguno'}
+- Nivel de uso de herramientas: ${d.nivel_soft || 'no especificado'}
+- Causa raíz declarada: ${diagnostico.causa || 'no especificada'}
+- Relato del cliente: ${d.relato_libre || 'no proporcionado'}
+
+Responde en español, con un tono profesional y directo, priorizando acciones concretas.`;
+  }
+
+  // ============ RENDER ORG CHART (exactamente igual al original) ============
+  function renderOrgChart(d, depts) {
+    const container = document.getElementById('org-chart-container');
+    container.innerHTML = `
+      <div class="org-ceo">
+        <span class="company-name">${escHtml(d.nombre)}</span>
+        <span class="ceo-role">${escHtml(d.decisionMaker)}</span>
+      </div>
+      <div class="connector-v"></div>
+    `;
+    const deptRow = depts.filter(dep => dep.name !== 'Dirección');
+    const row = document.createElement('div');
+    row.className = 'dept-row';
+    deptRow.forEach(dept => {
+      const col = document.createElement('div');
+      col.className = 'dept-col';
+      let subHTML = '';
+      if (dept.subareas && dept.subareas.length) {
+        subHTML = '<div class="subareas">';
+        dept.subareas.forEach(s => { subHTML += `<div class="subarea-connector"></div><div class="subarea-node">${escHtml(s)}</div>`; });
+        subHTML += '</div>';
+      }
+      col.innerHTML = `
+        <div class="dept-node">
+          <span class="dept-icon">${dept.icon}</span>
+          <span class="dept-name">${escHtml(dept.name)}</span>
+          <span class="dept-count">${dept.count} persona${dept.count !== 1 ? 's' : ''}</span>
+        </div>
+        ${subHTML}
+      `;
+      row.appendChild(col);
+    });
+    container.appendChild(row);
+  }
+
   function buildDepts(d) {
     const depts = [];
     depts.push({ icon: '🧠', name: 'Dirección', count: 1, subareas: [] });
@@ -1443,56 +1574,6 @@
     return depts;
   }
 
-  function renderOrgChart(d, depts) {
-    const container = document.getElementById('org-chart-container');
-    container.innerHTML = `
-      <div class="org-ceo">
-        <span class="company-name">${escHtml(d.nombre)}</span>
-        <span class="ceo-role">${escHtml(d.decisionMaker)}</span>
-      </div>
-      <div class="connector-v"></div>
-    `;
-    const deptRow = depts.filter(dep => dep.name !== 'Dirección');
-    const row = document.createElement('div');
-    row.className = 'dept-row';
-    deptRow.forEach(dept => {
-      const col = document.createElement('div');
-      col.className = 'dept-col';
-      let subHTML = '';
-      if (dept.subareas && dept.subareas.length) {
-        subHTML = '<div class="subareas">';
-        dept.subareas.forEach(s => { subHTML += `<div class="subarea-connector"></div><div class="subarea-node">${escHtml(s)}</div>`; });
-        subHTML += '</div>';
-      }
-      col.innerHTML = `
-        <div class="dept-node">
-          <span class="dept-icon">${dept.icon}</span>
-          <span class="dept-name">${escHtml(dept.name)}</span>
-          <span class="dept-count">${dept.count} persona${dept.count !== 1 ? 's' : ''}</span>
-        </div>
-        ${subHTML}
-      `;
-      row.appendChild(col);
-    });
-    container.appendChild(row);
-  }
-
-  function renderDiagnostico(diagnostico) {
-    const container = document.getElementById('diagnostico-container');
-    if (!diagnostico.principal) {
-      container.innerHTML = `<div class="diagnostico-card" style="border-left-color: #16a34a;"><h3>✅ Diagnóstico general</h3><p>${diagnostico.mensaje}</p></div>`;
-      return;
-    }
-    container.innerHTML = `
-      <div class="diagnostico-card">
-        <h3>🔍 Departamento con mayor problema detectado</h3>
-        <div class="dept-highlight">${escHtml(diagnostico.principal)}</div>
-        <div class="razon">${escHtml(diagnostico.razon)}</div>
-        <div class="sugerencia">💡 Sugerencia: ${escHtml(diagnostico.sugerencia)}</div>
-      </div>
-    `;
-  }
-
   function generateInsights(d, depts) {
     const insights = [];
     if (!d.haceMkt || d.haceMkt === 'no') insights.push({ type: 'warn', text: 'No hay área de marketing activa. Considerá al menos un responsable de comunicación.' });
@@ -1511,6 +1592,7 @@
     section.innerHTML = html;
   }
 
+  // ============ GENERACIÓN PRINCIPAL ============
   function generateOrg() {
     const d = collectData();
     const depts = buildDepts(d);
@@ -1518,10 +1600,27 @@
 
     document.getElementById('result-subtitle').textContent = `${escHtml(d.nombre)} · ${d.totalEmpleados} personas · ${d.rubro || d.tipoNegocio}`;
     renderOrgChart(d, depts);
-    renderDiagnostico(diagnostico);
     generateInsights(d, depts);
 
-    const obsText = [d.problema ? `Problema a resolver: ${d.problema}` : '', d.obsLibre].filter(Boolean).join('\n');
+    // Mostrar diagnóstico mejorado
+    const diagContainer = document.getElementById('diagnostico-container');
+    diagContainer.innerHTML = `
+      <div class="diagnostico-card">
+        <h3>🔍 Departamento crítico detectado</h3>
+        <div class="dept-highlight">${escHtml(diagnostico.area)}</div>
+        <p><strong>Causa raíz probable:</strong> ${diagnostico.causa === 'personas' ? 'Problema de PERSONAS' : diagnostico.causa === 'proceso' ? 'Problema de PROCESOS' : diagnostico.causa === 'herramientas' ? 'Problema de HERRAMIENTAS' : 'No especificada'}</p>
+        <div class="sugerencia">💡 Sugerencia: ${escHtml(diagnostico.sugerencia)}</div>
+      </div>
+    `;
+
+    // Generar prompt y mostrarlo
+    const promptText = buildPrompt(d, diagnostico);
+    const promptArea = document.getElementById('prompt-ia');
+    promptArea.value = promptText;
+    document.getElementById('prompt-box').style.display = 'block';
+
+    // Observaciones
+    const obsText = [d.problema ? `Problema: ${d.problema}` : '', d.obsLibre, d.relato_libre].filter(Boolean).join('\n\n');
     const obsBox = document.getElementById('observations-box');
     if (obsText.trim()) {
       document.getElementById('observations-text').textContent = obsText;
@@ -1529,6 +1628,7 @@
     } else {
       obsBox.style.display = 'none';
     }
+
     document.getElementById('wizard-wrap').style.display = 'none';
     document.getElementById('main-hero').style.display = 'none';
     document.getElementById('result-page').style.display = 'block';
@@ -1536,67 +1636,13 @@
   }
 
   function exportHTML() {
-    const orgHTML = document.getElementById('org-chart-container').outerHTML;
-    const diagnosticoHTML = document.getElementById('diagnostico-container').innerHTML;
-    const insightsHTML = document.getElementById('insights-section').innerHTML;
-    const obsHTML = document.getElementById('observations-box').style.display !== 'none' ? document.getElementById('observations-box').outerHTML : '';
-    const empresa = document.getElementById('empresa-nombre').value.trim() || 'Mi Empresa';
-    const html = `<!DOCTYPE html>
-<html lang="es">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organigrama · ${empresa}</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
-<style>
-  :root{--accent:#1a1a2e;--accent2:#2d4a8a;--highlight:#e05c2a;--text:#1a1a1a;--text-muted:#777770;--border:#e0e0d8;--bg:#fff;--bg2:#f5f5f0;}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Lato',sans-serif;font-size:17px;font-weight:300;background:#fff;color:var(--text);padding:40px 24px 80px}
-  .org-wrap{overflow-x:auto;padding:16px 0 32px}
-  .org-chart{display:flex;flex-direction:column;align-items:center;gap:0;min-width:640px}
-  .org-ceo{background:var(--accent);color:#fff;padding:16px 40px;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;text-align:center;min-width:200px}
-  .org-ceo .company-name{font-size:20px;font-weight:800;display:block;margin-bottom:2px}
-  .org-ceo .ceo-role{font-size:12px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:1.5px;text-transform:uppercase}
-  .connector-v{width:2px;height:32px;background:var(--border);margin:0 auto}
-  .dept-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding-top:32px}
-  .dept-col{display:flex;flex-direction:column;align-items:center;gap:0}
-  .dept-col::before{content:'';width:2px;height:32px;background:var(--border);display:block}
-  .dept-node{border:2px solid var(--accent);background:#fff;border-radius:4px;padding:14px 22px;text-align:center;min-width:150px;max-width:180px}
-  .dept-node .dept-icon{font-size:22px;display:block;margin-bottom:6px}
-  .dept-node .dept-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--accent);display:block;margin-bottom:4px}
-  .dept-node .dept-count{font-size:12px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:4px;font-weight:400}
-  .dept-node .dept-count::before{content:'';display:inline-block;width:6px;height:6px;background:var(--highlight);border-radius:50%}
-  .subareas{display:flex;flex-direction:column;gap:8px;margin-top:0;align-items:center}
-  .subarea-connector{width:2px;height:16px;background:var(--border)}
-  .subarea-node{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:8px 14px;font-size:13px;color:var(--text-muted);text-align:center;min-width:140px;max-width:170px}
-  .diagnostico-card{background:#fff8f0;border-left:5px solid var(--highlight);border-radius:8px;padding:28px 32px;margin:20px 0 32px}
-  .diagnostico-card h3{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);margin-bottom:8px}
-  .dept-highlight{background:var(--highlight);color:#fff;padding:4px 12px;border-radius:30px;display:inline-block;margin:12px 0 8px}
-  .razon{font-size:16px;font-weight:500;margin:12px 0 8px}
-  .sugerencia{background:#f0f4ff;padding:12px 16px;border-radius:6px;margin-top:12px;color:var(--accent2)}
-  .insights-section{margin-top:32px}
-  .insights-section h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--accent);margin-bottom:16px}
-  .insight-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
-  .insight-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:18px 20px}
-  .insight-card .i-type{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
-  .i-type.warn{color:#d97706}.i-type.ok{color:#16a34a}.i-type.tip{color:var(--accent2)}
-  .insight-card p{font-size:14px;color:var(--text);line-height:1.5;font-weight:300}
-  .observations-box{margin-top:40px;padding:28px 32px;background:var(--bg2);border-left:4px solid var(--highlight);border-radius:0 4px 4px 0}
-  .observations-box h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--accent);margin-bottom:12px}
-  .obs-tag{background:var(--highlight);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px}
-  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
-  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--accent)}
-  .logo span{color:var(--highlight)}
-</style>
-</head>
-<body>
-<header><div class="logo">ipora<span>.</span></div><small style="color:#777770">Organigrama generado automáticamente</small></header>
-<div class="org-wrap"><div class="org-chart">${orgHTML.replace(/<div class="org-chart" [^>]*>/, '').replace(/<\/div>\s*$/, '')}</div></div>
-${diagnosticoHTML}
-<div class="insights-section"><h3>Observaciones de estructura</h3><div class="insight-cards">${insightsHTML.replace(/<h3>[^<]*<\/h3>/, '').replace(/<div class="insight-cards">/, '').replace(/<\/div>\s*$/, '')}</div></div>
-${obsHTML}
-</body></html>`;
+    const content = document.getElementById('result-page').cloneNode(true);
+    const styles = document.querySelector('style').innerHTML;
+    const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Diagnóstico ${escHtml(document.getElementById('empresa-nombre').value)}</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Lato:wght@300;400&display=swap" rel="stylesheet"><style>${styles}</style></head><body>${content.innerHTML}</body></html>`;
     const blob = new Blob([html], { type: 'text/html' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `organigrama-${empresa.toLowerCase().replace(/\s+/g,'-')}.html`;
+    a.download = `diagnostico-${document.getElementById('empresa-nombre').value.toLowerCase().replace(/\s/g,'-')}.html`;
     a.click();
   }
 
@@ -1608,13 +1654,20 @@ ${obsHTML}
     updateUI();
   }
 
+  function copyPrompt() {
+    const textarea = document.getElementById('prompt-ia');
+    textarea.select();
+    document.execCommand('copy');
+    alert('Prompt copiado al portapapeles');
+  }
+
   function escHtml(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  // Inicializar condicionales al cargar (por si hay radios preseleccionados)
+  // Inicializar condicionales
   window.addEventListener('DOMContentLoaded', () => {
-    // Forzar actualización de condicionales
+    updateUI();
     const mktRadio = document.querySelector('input[name="hace-mkt"]:checked');
     if (mktRadio) toggleConditional('mkt-detail', 'si', 'hace-mkt');
     const ventasRadio = document.querySelector('input[name="tiene-ventas"]:checked');
