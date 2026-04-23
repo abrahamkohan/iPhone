@@ -1,1000 +1,1629 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>iPhone Hardening — Nivel Auditoría</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Organigrama Inteligente · Ipora</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f0;
+    --accent: #1a1a2e;
+    --accent2: #2d4a8a;
+    --highlight: #e05c2a;
+    --text: #1a1a1a;
+    --text-muted: #777770;
+    --border: #e0e0d8;
+  }
 
-body {
-background: #0a0a0f;
-color: #e8e8f0;
-font-family: ‘Syne’, ‘Trebuchet MS’, ‘Segoe UI’, Arial, sans-serif;
-min-height: 100vh;
-overflow-x: hidden;
-}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Background grid */
-body::before {
-content: ‘’;
-position: fixed;
-inset: 0;
-background-image:
-linear-gradient(rgba(0,255,136,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(0,255,136,0.03) 1px, transparent 1px);
-background-size: 40px 40px;
-pointer-events: none;
-z-index: 0;
-}
+  body {
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    font-weight: 300;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
 
-.container {
-max-width: 780px;
-margin: 0 auto;
-padding: 0 20px 80px;
-position: relative;
-z-index: 1;
-}
+  /* NAV */
+  nav {
+    padding: 22px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
 
-/* HEADER */
-header {
-padding: 60px 0 40px;
-text-align: center;
-position: relative;
-}
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--accent);
+    letter-spacing: -0.5px;
+  }
 
-.shield-icon {
-font-size: 48px;
-margin-bottom: 16px;
-display: block;
-filter: drop-shadow(0 0 20px rgba(0,255,136,0.4));
-animation: pulse 3s ease-in-out infinite;
-}
+  .logo span { color: var(--highlight); }
 
-@keyframes pulse {
-0%, 100% { filter: drop-shadow(0 0 20px rgba(0,255,136,0.4)); }
-50% { filter: drop-shadow(0 0 40px rgba(0,255,136,0.8)); }
-}
+  nav p {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
 
-h1 {
-font-size: clamp(28px, 6vw, 48px);
-font-weight: 800;
-line-height: 1.1;
-letter-spacing: -1px;
-}
+  /* HERO */
+  .hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 80px 48px 72px;
+    position: relative;
+    overflow: hidden;
+  }
 
-h1 .highlight {
-color: #00ff88;
-display: block;
-}
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: -60px;
+    width: 400px;
+    height: 400px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
 
-.subtitle {
-margin-top: 12px;
-color: #6b6b85;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 13px;
-letter-spacing: 2px;
-text-transform: uppercase;
-}
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 60px;
+    bottom: -80px;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(224,92,42,0.25);
+    border-radius: 50%;
+  }
 
-.warning-banner {
-margin: 32px 0;
-padding: 14px 20px;
-background: rgba(245,166,35,0.07);
-border: 1px solid rgba(245,166,35,0.25);
-border-left: 3px solid #f5a623;
-border-radius: 4px;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 12px;
-color: #f5c97a;
-line-height: 1.6;
-}
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--highlight);
+    margin-bottom: 20px;
+  }
 
-/* PROGRESS BAR */
-.progress-wrap {
-margin: 0 0 40px;
-padding: 20px 24px;
-background: #111118;
-border: 1px solid #1e1e2e;
-border-radius: 8px;
-}
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.1;
+    max-width: 640px;
+    margin-bottom: 20px;
+  }
 
-.progress-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 12px;
-}
+  .hero h1 em {
+    font-style: normal;
+    color: var(--highlight);
+  }
 
-.progress-label {
-font-size: 12px;
-text-transform: uppercase;
-letter-spacing: 2px;
-color: #6b6b85;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-}
+  .hero p {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
 
-.progress-count {
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 22px;
-font-weight: 700;
-color: #00ff88;
-}
+  /* MAIN CONTENT */
+  .main-wrap {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 24px 80px;
+  }
 
-.progress-bar-bg {
-height: 6px;
-background: #1e1e2e;
-border-radius: 3px;
-overflow: hidden;
-}
+  /* PROGRESS BAR */
+  .progress-wrap {
+    margin-bottom: 48px;
+  }
 
-.progress-bar-fill {
-height: 100%;
-background: linear-gradient(90deg, #00ff88, #00ccff);
-border-radius: 3px;
-transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
-width: 0%;
-}
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
 
-/* SECTIONS */
-.section {
-margin-bottom: 12px;
-border: 1px solid #1e1e2e;
-border-radius: 8px;
-overflow: hidden;
-background: #111118;
-transition: border-color 0.2s;
-}
+  .progress-label span {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
 
-.section:hover {
-border-color: rgba(0,255,136,0.2);
-}
+  .progress-label strong {
+    font-size: 13px;
+    color: var(--accent);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+  }
 
-.section-header {
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 16px 20px;
-cursor: pointer;
-user-select: none;
-background: #16161f;
-transition: background 0.2s;
-}
+  .progress-track {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+  }
 
-.section-header:hover {
-background: #1a1a25;
-}
+  .progress-fill {
+    height: 100%;
+    background: var(--highlight);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
 
-.section-title-wrap {
-display: flex;
-align-items: center;
-gap: 12px;
-}
+  .steps-dots {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
 
-.section-emoji {
-font-size: 20px;
-width: 32px;
-text-align: center;
-}
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all 0.3s;
+  }
 
-.section-title {
-font-size: 15px;
-font-weight: 600;
-letter-spacing: 0.3px;
-}
+  .dot.done { background: var(--highlight); }
+  .dot.active { background: var(--accent); transform: scale(1.4); }
 
-.section-badge {
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 11px;
-padding: 3px 8px;
-border-radius: 20px;
-background: rgba(0,255,136,0.1);
-color: #00ff88;
-border: 1px solid rgba(0,255,136,0.2);
-}
+  .step-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
 
-.section-badge.critical {
-background: rgba(255,60,95,0.1);
-color: #ff3c5f;
-border-color: rgba(255,60,95,0.2);
-}
+  .step-panel.active { display: block; }
 
-.chevron {
-color: #6b6b85;
-font-size: 12px;
-transition: transform 0.3s;
-}
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
-.section.open .chevron { transform: rotate(180deg); }
+  .step-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 36px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
 
-.section-body {
-display: none;
-padding: 8px 0;
-}
+  .step-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
 
-.section.open .section-body { display: block; }
+  .step-header-text h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
 
-/* ITEMS */
-.item {
-display: flex;
-align-items: flex-start;
-gap: 14px;
-padding: 12px 20px;
-cursor: pointer;
-transition: background 0.15s;
-border-bottom: 1px solid rgba(255,255,255,0.03);
-}
+  .step-header-text p {
+    font-size: 15px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
 
-.item:last-child { border-bottom: none; }
-.item:hover { background: rgba(255,255,255,0.02); }
+  .field-group {
+    margin-bottom: 28px;
+  }
 
-.item.checked {
-background: rgba(0,255,136,0.03);
-}
+  label {
+    display: block;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
 
-.checkbox {
-width: 20px;
-height: 20px;
-border: 2px solid #1e1e2e;
-border-radius: 4px;
-flex-shrink: 0;
-margin-top: 1px;
-display: flex;
-align-items: center;
-justify-content: center;
-transition: all 0.2s;
-background: transparent;
-}
+  label strong { font-weight: 700; }
 
-.item.checked .checkbox {
-background: #00ff88;
-border-color: #00ff88;
-}
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--text);
+    border-radius: 4px;
+    transition: border-color 0.2s;
+    outline: none;
+    appearance: none;
+  }
 
-.checkmark {
-display: none;
-color: #000;
-font-size: 12px;
-font-weight: 700;
-}
+  input:focus, select:focus, textarea:focus { border-color: var(--accent2); }
 
-.item.checked .checkmark { display: block; }
+  textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.5;
+  }
 
-.item-content { flex: 1; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777770' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
 
-.item-text {
-font-size: 14px;
-line-height: 1.5;
-transition: color 0.2s;
-}
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+  }
 
-.item.checked .item-text {
-color: #6b6b85;
-text-decoration: line-through;
-text-decoration-color: rgba(0,255,136,0.4);
-}
+  .options-grid.cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
 
-.item-route {
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 11px;
-color: #6b6b85;
-margin-top: 4px;
-line-height: 1.4;
-}
+  .option-card {
+    position: relative;
+  }
 
-.item-tag {
-display: inline-block;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 10px;
-padding: 2px 6px;
-border-radius: 3px;
-margin-right: 6px;
-margin-top: 5px;
-}
+  .option-card input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
 
-.tag-critico { background: rgba(255,60,95,0.15); color: #ff8fa0; }
-.tag-alto { background: rgba(245,166,35,0.15); color: #f5a623; }
-.tag-recomendado { background: rgba(0,255,136,0.1); color: #00cc6a; }
+  .option-card label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    transition: all 0.2s;
+    background: var(--bg);
+    user-select: none;
+  }
 
-/* FOOTER */
-.footer-section {
-margin-top: 40px;
-padding: 28px 24px;
-background: #111118;
-border: 1px solid rgba(0,255,136,0.2);
-border-radius: 8px;
-text-align: center;
-}
+  .option-card label:hover {
+    border-color: var(--accent2);
+    background: #f0f4ff;
+  }
 
-.footer-section h3 {
-font-size: 13px;
-text-transform: uppercase;
-letter-spacing: 3px;
-color: #00ff88;
-margin-bottom: 16px;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-}
+  .option-card input:checked + label {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: #fff;
+  }
 
-.pillars {
-display: flex;
-flex-wrap: wrap;
-gap: 8px;
-justify-content: center;
-}
+  .option-icon { font-size: 16px; }
 
-.pillar {
-padding: 6px 14px;
-background: rgba(0,255,136,0.05);
-border: 1px solid rgba(0,255,136,0.15);
-border-radius: 20px;
-font-size: 13px;
-color: #e8e8f0;
-}
+  .number-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    max-width: 180px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
 
-.pillars-cards {
-display: grid;
-grid-template-columns: 1fr;
-gap: 12px;
-margin-top: 20px;
-text-align: left;
-}
+  .number-btn {
+    width: 44px;
+    height: 48px;
+    background: var(--bg2);
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
 
-.pilar-card {
-background: #16161f;
-border: 1px solid #1e1e2e;
-border-radius: 8px;
-padding: 18px 20px;
-display: flex;
-gap: 16px;
-align-items: flex-start;
-transition: border-color 0.2s;
-}
+  .number-btn:hover { background: var(--border); }
 
-.pilar-card:hover { border-color: rgba(0,255,136,0.25); }
+  .number-input-wrap input[type="number"] {
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Syne', sans-serif;
+    width: 80px;
+    padding: 8px 0;
+  }
 
-.pilar-num {
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 22px;
-font-weight: 700;
-color: #00ff88;
-line-height: 1;
-flex-shrink: 0;
-width: 32px;
-}
+  .number-input-wrap input[type="number"]::-webkit-inner-spin-button,
+  .number-input-wrap input[type="number"]::-webkit-outer-spin-button { appearance: none; }
 
-.pilar-body {}
+  .conditional {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--bg2);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 4px 4px 0;
+  }
 
-.pilar-title {
-font-size: 15px;
-font-weight: 700;
-color: #e8e8f0;
-margin-bottom: 6px;
-display: flex;
-align-items: center;
-gap: 8px;
-}
+  .conditional.visible { display: block; }
 
-.pilar-title span { font-size: 18px; }
+  .field-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 28px 0;
+  }
 
-.pilar-desc {
-font-size: 13px;
-color: #a0a0b8;
-line-height: 1.6;
-margin-bottom: 8px;
-}
+  .field-hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-weight: 400;
+  }
 
-.pilar-how {
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 11px;
-color: #00ff88;
-background: rgba(0,255,136,0.07);
-border: 1px solid rgba(0,255,136,0.15);
-border-radius: 4px;
-padding: 8px 12px;
-line-height: 1.6;
-}
+  .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border);
+  }
 
-.pilar-how strong {
-color: #e8e8f0;
-display: block;
-margin-bottom: 2px;
-font-size: 10px;
-text-transform: uppercase;
-letter-spacing: 1px;
-}
+  .btn {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 32px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
 
-.share-btn {
-margin-top: 24px;
-padding: 14px 32px;
-background: #00ff88;
-color: #000;
-border: none;
-border-radius: 6px;
-font-family: ‘Syne’, ‘Trebuchet MS’, ‘Segoe UI’, Arial, sans-serif;
-font-size: 14px;
-font-weight: 700;
-cursor: pointer;
-letter-spacing: 0.5px;
-transition: all 0.2s;
-}
+  .btn-secondary {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
 
-.share-btn:hover {
-background: #00cc70;
-transform: translateY(-1px);
-box-shadow: 0 8px 24px rgba(0,255,136,0.3);
-}
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
 
-.complete-message {
-display: none;
-margin-top: 16px;
-font-family: ‘Space Mono’, ‘Courier New’, Courier, monospace;
-font-size: 13px;
-color: #00ff88;
-letter-spacing: 1px;
-}
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
 
-@media (max-width: 480px) {
-header { padding: 40px 0 24px; }
-.section-title { font-size: 13px; }
-.item { padding: 12px 16px; }
-}
+  .btn-primary:hover {
+    background: var(--accent2);
+    transform: translateY(-1px);
+  }
+
+  .btn-generate {
+    background: var(--highlight);
+    color: #fff;
+    padding: 14px 40px;
+  }
+
+  .btn-generate:hover {
+    background: #c94d1f;
+    transform: translateY(-1px);
+  }
+
+  /* RESULT PAGE */
+  #result-page {
+    display: none;
+    padding: 0 0 80px;
+  }
+
+  .result-hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 56px 48px;
+    margin-bottom: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .result-hero h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .result-hero p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.6);
+    font-weight: 300;
+  }
+
+  .result-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-export {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: transparent;
+    color: #fff;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-export:hover { background: rgba(255,255,255,0.1); }
+
+  .btn-export-solid {
+    background: var(--highlight);
+    border-color: var(--highlight);
+  }
+
+  .btn-export-solid:hover { background: #c94d1f; border-color: #c94d1f; }
+
+  .result-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ORG CHART */
+  .org-wrap {
+    overflow-x: auto;
+    padding: 16px 0 32px;
+  }
+
+  .org-chart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    min-width: 640px;
+  }
+
+  .org-ceo {
+    background: var(--accent);
+    color: #fff;
+    padding: 16px 40px;
+    border-radius: 4px;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+    min-width: 200px;
+  }
+
+  .org-ceo .company-name {
+    font-size: 20px;
+    font-weight: 800;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .org-ceo .ceo-role {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .connector-v {
+    width: 2px;
+    height: 32px;
+    background: var(--border);
+    margin: 0 auto;
+  }
+
+  .dept-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-top: 32px;
+    position: relative;
+  }
+
+  .dept-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    position: relative;
+  }
+
+  .dept-col::before {
+    content: '';
+    width: 2px;
+    height: 32px;
+    background: var(--border);
+    display: block;
+  }
+
+  .dept-node {
+    border: 2px solid var(--accent);
+    background: var(--bg);
+    border-radius: 4px;
+    padding: 14px 22px;
+    text-align: center;
+    min-width: 150px;
+    max-width: 180px;
+  }
+
+  .dept-node .dept-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .dept-node .dept-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .dept-node .dept-count {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-weight: 400;
+  }
+
+  .dept-node .dept-count::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--highlight);
+    border-radius: 50%;
+  }
+
+  .subareas {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 0;
+    align-items: center;
+  }
+
+  .subarea-connector {
+    width: 2px;
+    height: 16px;
+    background: var(--border);
+  }
+
+  .subarea-node {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    min-width: 140px;
+    max-width: 170px;
+    font-weight: 400;
+  }
+
+  /* DIAGNÓSTICO PRINCIPAL */
+  .diagnostico-card {
+    background: linear-gradient(135deg, #fff8f0 0%, #fff 100%);
+    border-left: 5px solid var(--highlight);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+  }
+
+  .diagnostico-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .diagnostico-card .dept-highlight {
+    background: var(--highlight);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 30px;
+    font-size: 14px;
+    display: inline-block;
+    margin: 12px 0 8px;
+  }
+
+  .diagnostico-card .razon {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin: 12px 0 8px;
+  }
+
+  .diagnostico-card .sugerencia {
+    font-size: 15px;
+    color: var(--accent2);
+    background: #f0f4ff;
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+  }
+
+  .insights-section {
+    margin-top: 32px;
+  }
+
+  .insights-section h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .insight-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .insight-card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 18px 20px;
+  }
+
+  .insight-card .i-type {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .insight-card .i-type.warn { color: #d97706; }
+  .insight-card .i-type.ok { color: #16a34a; }
+  .insight-card .i-type.tip { color: var(--accent2); }
+
+  .insight-card p {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .observations-box {
+    margin-top: 40px;
+    padding: 28px 32px;
+    background: var(--bg2);
+    border-left: 4px solid var(--highlight);
+    border-radius: 0 4px 4px 0;
+  }
+
+  .observations-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .obs-tag {
+    display: inline-block;
+    background: var(--highlight);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .observations-box p {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.65;
+    font-weight: 300;
+    white-space: pre-wrap;
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 60px;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  footer p {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  footer a {
+    color: var(--highlight);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    nav, .hero, .result-hero, footer { padding-left: 20px; padding-right: 20px; }
+    .hero { padding-top: 52px; padding-bottom: 52px; }
+    .options-grid { grid-template-columns: 1fr; }
+    .options-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .dept-row { gap: 10px; }
+    .dept-node { min-width: 120px; padding: 12px 14px; }
+  }
 </style>
-
 </head>
 <body>
-<div class="container">
 
-  <header>
-    <span class="shield-icon">🔐</span>
-    <h1>iPhone Hardening<span class="highlight">Nivel Auditoría</span></h1>
-    <p class="subtitle">Protección real contra análisis forense</p>
-    <div class="warning-banner">
-      ⚠️ Ningún sistema es 100% inviolable. Este checklist apunta a resistencia realista y alta contra herramientas como Cellebrite UFED / GrayKey.
-    </div>
-  </header>
+<nav>
+  <div class="logo">ipora<span>.</span></div>
+  <p>Diagnóstico · Organigrama inteligente</p>
+</nav>
+
+<div class="hero" id="main-hero">
+  <span class="hero-tag">✦ Detecta problemas por departamento</span>
+  <h1>Entendé tu negocio, <em>encontrá</em> el cuello de botella</h1>
+  <p>Respondé el cuestionario y generamos un organigrama + diagnóstico del área que más te está frenando.</p>
+</div>
+
+<div class="main-wrap" id="wizard-wrap">
 
   <div class="progress-wrap">
-    <div class="progress-header">
-      <span class="progress-label">Progreso total</span>
-      <span class="progress-count" id="progressCount">0 / 0</span>
+    <div class="progress-label">
+      <span id="step-label">Paso 1 de 9</span>
+      <strong id="step-name-label">Información general</strong>
     </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progressBar"></div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progress-fill" style="width: 11%"></div>
     </div>
+    <div class="steps-dots" id="steps-dots"></div>
   </div>
 
-  <!-- 1 -->
-
-  <div class="section open" data-section="1">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🔒</span>
-        <span class="section-title">Bloqueo y Acceso</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge critical">CRÍTICO</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 1 -->
+  <div class="step-panel active" data-step="1">
+    <div class="step-header">
+      <div class="step-icon">🏢</div>
+      <div class="step-header-text"><h2>Información general</h2><p>Primero necesitamos entender el contexto de tu empresa.</p></div>
+    </div>
+    <div class="field-group">
+      <label><strong>Nombre de la empresa</strong></label>
+      <input type="text" id="empresa-nombre" placeholder="Ej: Mi Empresa S.A.">
+    </div>
+    <div class="field-group">
+      <label><strong>Rubro / Industria</strong></label>
+      <input type="text" id="empresa-rubro" placeholder="Ej: Inmobiliaria, Salud, Tecnología...">
+    </div>
+    <div class="field-group">
+      <label><strong>Tipo de negocio</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="tipo-negocio" id="tipo-servicios" value="servicios"><label for="tipo-servicios"><span class="option-icon">🎯</span>Servicios</label></div>
+        <div class="option-card"><input type="radio" name="tipo-negocio" id="tipo-productos" value="productos"><label for="tipo-productos"><span class="option-icon">📦</span>Venta de productos</label></div>
+        <div class="option-card"><input type="radio" name="tipo-negocio" id="tipo-mixto" value="mixto"><label for="tipo-mixto"><span class="option-icon">🔀</span>Mixto</label></div>
+        <div class="option-card"><input type="radio" name="tipo-negocio" id="tipo-otro" value="otro"><label for="tipo-otro"><span class="option-icon">💡</span>Otro</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Cambiar a código alfanumérico de mínimo 10 caracteres</div>
-          <div class="item-route">Ajustes → Face ID y código → Cambiar código → Opciones → Código alfanumérico</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Evaluar desactivar Face ID / Touch ID — o limitarlo solo a desbloqueo básico</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Desactivar todos los accesos con pantalla bloqueada: Centro de control, Notificaciones, Siri, Wallet, Accesorios USB</div>
-          <div class="item-route">Ajustes → Face ID y código → "Permitir acceso con dispositivo bloqueado"</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Activar borrado automático tras 10 intentos fallidos</div>
-          <div class="item-route">Ajustes → Face ID y código → Borrar datos → ON</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
+    <div class="field-group">
+      <label><strong>Cantidad total de empleados</strong></label>
+      <div class="number-input-wrap">
+        <button class="number-btn" onclick="changeNum('total-empleados',-1)" aria-label="Decrementar">−</button>
+        <input type="number" id="total-empleados" value="5" min="1">
+        <button class="number-btn" onclick="changeNum('total-empleados',1)" aria-label="Incrementar">+</button>
       </div>
     </div>
   </div>
 
-  <!-- 2 -->
-
-  <div class="section" data-section="2">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🔌</span>
-        <span class="section-title">Protección Física / Forense</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge critical">CRÍTICO</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 2 -->
+  <div class="step-panel" data-step="2">
+    <div class="step-header"><div class="step-icon">🧠</div><div class="step-header-text"><h2>Dirección y management</h2><p>Quién conduce y cómo se toman decisiones.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Quién toma las decisiones estratégicas?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="decision-maker" id="dm-dueno" value="Dueño / Fundador"><label for="dm-dueno"><span class="option-icon">👤</span>Dueño / Fundador</label></div>
+        <div class="option-card"><input type="radio" name="decision-maker" id="dm-directorio" value="Directorio"><label for="dm-directorio"><span class="option-icon">👥</span>Directorio</label></div>
+        <div class="option-card"><input type="radio" name="decision-maker" id="dm-gerente" value="Gerente General"><label for="dm-gerente"><span class="option-icon">🏛️</span>Gerente General</label></div>
+        <div class="option-card"><input type="radio" name="decision-maker" id="dm-socios" value="Socios"><label for="dm-socios"><span class="option-icon">🤝</span>Socios</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Verificar que USB Restricted Mode esté activo (bloquea extracción por cable tras 1h bloqueado)</div>
-          <div class="item-route">Ajustes → Face ID y código → Accesorios USB → OFF</div>
-          <span class="item-tag tag-alto">alto impacto</span>
+    <div class="field-divider"></div>
+    <div class="field-group">
+      <label><strong>¿Hay estructura jerárquica definida?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="hay-jerarquia" id="jerarquia-si" value="si"><label for="jerarquia-si">✅ Sí, está clara</label></div>
+        <div class="option-card"><input type="radio" name="hay-jerarquia" id="jerarquia-informal" value="informal"><label for="jerarquia-informal">🌀 Informal</label></div>
+        <div class="option-card"><input type="radio" name="hay-jerarquia" id="jerarquia-no" value="no"><label for="jerarquia-no">❌ No existe</label></div>
+        <div class="option-card"><input type="radio" name="hay-jerarquia" id="jerarquia-construccion" value="en construccion"><label for="jerarquia-construccion">🔧 En construcción</label></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-panel" data-step="3">
+    <div class="step-header"><div class="step-icon">📣</div><div class="step-header-text"><h2>Marketing y atracción</h2><p>Cómo la empresa llega a sus clientes potenciales.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿La empresa realiza acciones de marketing?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="hace-mkt" id="mkt-si" value="si" onchange="toggleConditional('mkt-detail','si','hace-mkt')"><label for="mkt-si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="hace-mkt" id="mkt-no" value="no" onchange="toggleConditional('mkt-detail','si','hace-mkt')"><label for="mkt-no">❌ No / Muy poco</label></div>
+      </div>
+    </div>
+    <div class="conditional" id="mkt-detail">
+      <div class="field-group">
+        <label><strong>Canales utilizados</strong></label>
+        <div class="options-grid">
+          <div class="option-card"><input type="checkbox" id="mkt-redes" value="Redes sociales"><label for="mkt-redes"><span class="option-icon">📱</span>Redes sociales</label></div>
+          <div class="option-card"><input type="checkbox" id="mkt-ads" value="Publicidad paga"><label for="mkt-ads"><span class="option-icon">💰</span>Publicidad paga</label></div>
+          <div class="option-card"><input type="checkbox" id="mkt-email" value="Email marketing"><label for="mkt-email"><span class="option-icon">📧</span>Email marketing</label></div>
+          <div class="option-card"><input type="checkbox" id="mkt-referidos" value="Referidos / Boca a boca"><label for="mkt-referidos"><span class="option-icon">🗣️</span>Referidos</label></div>
+          <div class="option-card"><input type="checkbox" id="mkt-seo" value="SEO / Contenido"><label for="mkt-seo"><span class="option-icon">🔍</span>SEO / Contenido</label></div>
+          <div class="option-card"><input type="checkbox" id="mkt-eventos" value="Eventos"><label for="mkt-eventos"><span class="option-icon">🎪</span>Eventos</label></div>
         </div>
       </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Ante cualquier riesgo: APAGAR el teléfono (no solo bloquear). El estado AFU es vulnerable.</div>
-          <span class="item-tag tag-critico">crítico</span>
+      <div class="field-group">
+        <label><strong>¿Existe un responsable de marketing?</strong></label>
+        <div class="options-grid cols-2">
+          <div class="option-card"><input type="radio" name="resp-mkt" id="rmkt-si" value="si"><label for="rmkt-si">✅ Sí</label></div>
+          <div class="option-card"><input type="radio" name="resp-mkt" id="rmkt-no" value="no"><label for="rmkt-no">❌ Lo hace el dueño</label></div>
+          <div class="option-card"><input type="radio" name="resp-mkt" id="rmkt-externo" value="externo"><label for="rmkt-externo">🌐 Externo / Agencia</label></div>
         </div>
       </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Configurar apagado rápido: botón lateral + volumen → deslizar. Memorizar como hábito.</div>
-          <span class="item-tag tag-recomendado">hábito clave</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Back Tap configurado para bloquear pantalla (útil para situaciones rápidas)</div>
-          <div class="item-route">Ajustes → Accesibilidad → Tocar → Tocar atrás → Doble toque → Bloquear pantalla</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">SOS Emergencia configurado (5 presiones laterales bloquea y desactiva biometría)</div>
-          <div class="item-route">Ajustes → Emergencia SOS</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
+      <div class="field-group">
+        <label><strong>Personas en marketing</strong></label>
+        <div class="number-input-wrap">
+          <button class="number-btn" onclick="changeNum('mkt-personas',-1)" aria-label="Decrementar">−</button>
+          <input type="number" id="mkt-personas" value="1" min="0">
+          <button class="number-btn" onclick="changeNum('mkt-personas',1)" aria-label="Incrementar">+</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 3 -->
-
-  <div class="section" data-section="3">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">☁️</span>
-        <span class="section-title">iCloud y Backups</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge critical">CRÍTICO</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 4 -->
+  <div class="step-panel" data-step="4">
+    <div class="step-header"><div class="step-icon">💰</div><div class="step-header-text"><h2>Ventas y conversión</h2><p>Cómo la empresa cierra negocios.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿La empresa tiene equipo de ventas?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="tiene-ventas" id="ventas-si" value="si" onchange="toggleConditional('ventas-detail','si','tiene-ventas')"><label for="ventas-si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="tiene-ventas" id="ventas-no" value="no" onchange="toggleConditional('ventas-detail','si','tiene-ventas')"><label for="ventas-no">❌ Sin equipo formal</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Activar Protección de Datos Avanzada (ADP) — sin esto Apple puede entregar tus datos con orden judicial</div>
-          <div class="item-route">Ajustes → iCloud → Protección de datos avanzada → ON</div>
-          <span class="item-tag tag-critico">crítico · prioridad máxima</span>
+    <div class="conditional" id="ventas-detail">
+      <div class="field-group">
+        <label><strong>Modalidad de ventas</strong></label>
+        <div class="options-grid">
+          <div class="option-card"><input type="checkbox" id="v-presencial" value="Presencial"><label for="v-presencial"><span class="option-icon">🤝</span>Presencial</label></div>
+          <div class="option-card"><input type="checkbox" id="v-online" value="Online"><label for="v-online"><span class="option-icon">💻</span>Online</label></div>
+          <div class="option-card"><input type="checkbox" id="v-telefono" value="Telefónica"><label for="v-telefono"><span class="option-icon">📞</span>Telefónica</label></div>
+          <div class="option-card"><input type="checkbox" id="v-whatsapp" value="WhatsApp"><label for="v-whatsapp"><span class="option-icon">💬</span>WhatsApp</label></div>
         </div>
       </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Desactivar backup automático iCloud</div>
-          <div class="item-route">Ajustes → [tu nombre] → iCloud → Copia en iCloud → OFF</div>
-          <span class="item-tag tag-alto">alto impacto</span>
+      <div class="field-group">
+        <label><strong>¿Hay proceso de ventas definido?</strong></label>
+        <div class="options-grid">
+          <div class="option-card"><input type="radio" name="proceso-ventas" id="pv-si" value="si documentado"><label for="pv-si">📋 Documentado</label></div>
+          <div class="option-card"><input type="radio" name="proceso-ventas" id="pv-informal" value="informal"><label for="pv-informal">🌀 Informal</label></div>
+          <div class="option-card"><input type="radio" name="proceso-ventas" id="pv-no" value="no"><label for="pv-no">❌ No hay proceso</label></div>
         </div>
       </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Revisar y desactivar sincronización de datos sensibles: Fotos, Mensajes, iCloud Drive, Contactos</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4 -->
-
-  <div class="section" data-section="4">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">💬</span>
-        <span class="section-title">Mensajería Segura</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">IMPORTANTE</span>
-        <span class="chevron">▼</span>
-      </div>
-    </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Instalar Signal como app principal de comunicaciones sensibles</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Signal: activar desaparición automática de mensajes (máximo 1 semana como política global)</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Signal: activar bloqueo interno con PIN o biometría</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Signal: desactivar backups externos completamente</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Evitar iMessage para comunicaciones sensibles (metadatos quedan en servidores Apple)</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">WhatsApp (si se usa): desactivar backup iCloud, activar mensajes temporales</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Telegram: usar SOLO chats secretos para contenido sensible. Los chats normales son cloud.</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
+      <div class="field-group">
+        <label><strong>Cantidad de vendedores</strong></label>
+        <div class="number-input-wrap">
+          <button class="number-btn" onclick="changeNum('ventas-personas',-1)" aria-label="Decrementar">−</button>
+          <input type="number" id="ventas-personas" value="1" min="0">
+          <button class="number-btn" onclick="changeNum('ventas-personas',1)" aria-label="Incrementar">+</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 5 -->
-
-  <div class="section" data-section="5">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🛡️</span>
-        <span class="section-title">Modo Alto Riesgo</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">SITUACIONAL</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 5 -->
+  <div class="step-panel" data-step="5">
+    <div class="step-header"><div class="step-icon">⚙️</div><div class="step-header-text"><h2>Operaciones</h2><p>El corazón de cómo se entrega el producto o servicio.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Cómo se entrega el servicio / producto?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="checkbox" id="op-presencial" value="Presencial / en local"><label for="op-presencial"><span class="option-icon">🏪</span>En local / presencial</label></div>
+        <div class="option-card"><input type="checkbox" id="op-remoto" value="Remoto / digital"><label for="op-remoto"><span class="option-icon">🌐</span>Remoto / digital</label></div>
+        <div class="option-card"><input type="checkbox" id="op-domicilio" value="A domicilio"><label for="op-domicilio"><span class="option-icon">🚚</span>A domicilio</label></div>
+        <div class="option-card"><input type="checkbox" id="op-mixto" value="Mixto"><label for="op-mixto"><span class="option-icon">🔀</span>Mixto</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Activar Modo Aislamiento (Lockdown Mode) — reduce drásticamente la superficie de ataque</div>
-          <div class="item-route">Ajustes → Privacidad y seguridad → Modo aislamiento</div>
-          <span class="item-tag tag-alto">alto impacto</span>
+    <div class="field-group">
+      <label><strong>¿Hay turnos, agenda o programación de trabajos?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="hay-agenda" id="agenda-si" value="si"><label for="agenda-si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="hay-agenda" id="agenda-no" value="no"><label for="agenda-no">❌ No</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>¿Hay manejo de inventario / stock?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="hay-stock" id="stock-si" value="si"><label for="stock-si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="hay-stock" id="stock-no" value="no"><label for="stock-no">❌ No aplica</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>Roles principales en operaciones</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="checkbox" id="rol-tecnico" value="Técnicos"><label for="rol-tecnico">🔧 Técnicos</label></div>
+        <div class="option-card"><input type="checkbox" id="rol-especialista" value="Especialistas"><label for="rol-especialista">🎓 Especialistas / Profesionales</label></div>
+        <div class="option-card"><input type="checkbox" id="rol-produccion" value="Producción"><label for="rol-produccion">🏭 Producción</label></div>
+        <div class="option-card"><input type="checkbox" id="rol-supervisor" value="Supervisores"><label for="rol-supervisor">👁️ Supervisores</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>Personas en operaciones</strong></label>
+      <div class="number-input-wrap">
+        <button class="number-btn" onclick="changeNum('op-personas',-1)" aria-label="Decrementar">−</button>
+        <input type="number" id="op-personas" value="2" min="0">
+        <button class="number-btn" onclick="changeNum('op-personas',1)" aria-label="Incrementar">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step-panel" data-step="6">
+    <div class="step-header"><div class="step-icon">📦</div><div class="step-header-text"><h2>Logística y distribución</h2><p>Movimiento físico de productos o materiales, si aplica.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Hay gestión de inventario activa?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="log-inventario" id="log-inv-si" value="si" onchange="toggleConditional('log-detail','si','log-inventario')"><label for="log-inv-si">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="log-inventario" id="log-inv-no" value="no" onchange="toggleConditional('log-detail','si','log-inventario')"><label for="log-inv-no">❌ No aplica</label></div>
+      </div>
+    </div>
+    <div class="conditional" id="log-detail">
+      <div class="field-group">
+        <label><strong>¿Hay envíos o distribución a clientes?</strong></label>
+        <div class="options-grid cols-2">
+          <div class="option-card"><input type="radio" name="log-envios" id="log-env-si" value="si"><label for="log-env-si">✅ Sí</label></div>
+          <div class="option-card"><input type="radio" name="log-envios" id="log-env-no" value="no"><label for="log-env-no">❌ No</label></div>
         </div>
       </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Activar Modo Avión ANTES de apagar ante situación de riesgo (corta comandos remotos)</div>
-          <span class="item-tag tag-alto">alto impacto</span>
+      <div class="field-group">
+        <label><strong>Personas en logística</strong></label>
+        <div class="number-input-wrap">
+          <button class="number-btn" onclick="changeNum('log-personas',-1)" aria-label="Decrementar">−</button>
+          <input type="number" id="log-personas" value="0" min="0">
+          <button class="number-btn" onclick="changeNum('log-personas',1)" aria-label="Incrementar">+</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 6 -->
-
-  <div class="section" data-section="6">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🔔</span>
-        <span class="section-title">Notificaciones y Pantalla</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">BÁSICO</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 7 -->
+  <div class="step-panel" data-step="7">
+    <div class="step-header"><div class="step-icon">🧾</div><div class="step-header-text"><h2>Administración y finanzas</h2><p>La columna vertebral financiera y operativa.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Quién gestiona la administración?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="quien-admin" id="adm-dueno" value="El dueño"><label for="adm-dueno">👤 El dueño / socio</label></div>
+        <div class="option-card"><input type="radio" name="quien-admin" id="adm-area" value="Área propia"><label for="adm-area">🏢 Área administrativa propia</label></div>
+        <div class="option-card"><input type="radio" name="quien-admin" id="adm-externo" value="Contador externo"><label for="adm-externo">📊 Contador externo</label></div>
+        <div class="option-card"><input type="radio" name="quien-admin" id="adm-mixto" value="Mixto"><label for="adm-mixto">🔀 Mixto</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Desactivar previsualización de mensajes en pantalla bloqueada</div>
-          <div class="item-route">Ajustes → Notificaciones → Mostrar previsualizaciones → Nunca</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
+    <div class="field-group">
+      <label><strong>Funciones que se gestionan internamente</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="checkbox" id="adm-cobros" value="Cobros"><label for="adm-cobros">💵 Cobros</label></div>
+        <div class="option-card"><input type="checkbox" id="adm-pagos" value="Pagos"><label for="adm-pagos">💳 Pagos</label></div>
+        <div class="option-card"><input type="checkbox" id="adm-facturacion" value="Facturación"><label for="adm-facturacion">📄 Facturación</label></div>
+        <div class="option-card"><input type="checkbox" id="adm-rrhh" value="RRHH"><label for="adm-rrhh">👥 RRHH / Liquidaciones</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>¿Usan algún sistema administrativo?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="sistema-admin" id="sa-si" value="si, dedicado"><label for="sa-si">✅ Software dedicado</label></div>
+        <div class="option-card"><input type="radio" name="sistema-admin" id="sa-excel" value="Excel / planillas"><label for="sa-excel">📊 Excel / planillas</label></div>
+        <div class="option-card"><input type="radio" name="sistema-admin" id="sa-no" value="no"><label for="sa-no">❌ Sin sistema</label></div>
+      </div>
+    </div>
+    <div class="field-group">
+      <label><strong>Personas en administración</strong></label>
+      <div class="number-input-wrap">
+        <button class="number-btn" onclick="changeNum('adm-personas',-1)" aria-label="Decrementar">−</button>
+        <input type="number" id="adm-personas" value="1" min="0">
+        <button class="number-btn" onclick="changeNum('adm-personas',1)" aria-label="Incrementar">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 8 -->
+  <div class="step-panel" data-step="8">
+    <div class="step-header"><div class="step-icon">🤝</div><div class="step-header-text"><h2>Post-venta y atención al cliente</h2><p>Cómo se mantiene la relación con el cliente después de la venta.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Existe seguimiento post-venta?</strong></label>
+      <div class="options-grid cols-2">
+        <div class="option-card"><input type="radio" name="tiene-postventa" id="pv-si-q" value="si" onchange="toggleConditional('pv-detail','si','tiene-postventa')"><label for="pv-si-q">✅ Sí</label></div>
+        <div class="option-card"><input type="radio" name="tiene-postventa" id="pv-no-q" value="no" onchange="toggleConditional('pv-detail','si','tiene-postventa')"><label for="pv-no-q">❌ No</label></div>
+      </div>
+    </div>
+    <div class="conditional" id="pv-detail">
+      <div class="field-group">
+        <label><strong>Canales de atención al cliente</strong></label>
+        <div class="options-grid">
+          <div class="option-card"><input type="checkbox" id="pv-wsp" value="WhatsApp"><label for="pv-wsp"><span class="option-icon">💬</span>WhatsApp</label></div>
+          <div class="option-card"><input type="checkbox" id="pv-email-ch" value="Email"><label for="pv-email-ch"><span class="option-icon">📧</span>Email</label></div>
+          <div class="option-card"><input type="checkbox" id="pv-tel" value="Teléfono"><label for="pv-tel"><span class="option-icon">📞</span>Teléfono</label></div>
+          <div class="option-card"><input type="checkbox" id="pv-redes-ch" value="Redes sociales"><label for="pv-redes-ch"><span class="option-icon">📱</span>Redes sociales</label></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label><strong>¿Hay equipo dedicado a atención al cliente?</strong></label>
+        <div class="options-grid cols-2">
+          <div class="option-card"><input type="radio" name="equipo-pv" id="epv-si" value="si"><label for="epv-si">✅ Sí</label></div>
+          <div class="option-card"><input type="radio" name="equipo-pv" id="epv-no" value="no, lo hace ventas"><label for="epv-no">Lo hace el equipo de ventas</label></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label><strong>Personas en post-venta / atención</strong></label>
+        <div class="number-input-wrap">
+          <button class="number-btn" onclick="changeNum('pv-personas',-1)" aria-label="Decrementar">−</button>
+          <input type="number" id="pv-personas" value="1" min="0">
+          <button class="number-btn" onclick="changeNum('pv-personas',1)" aria-label="Incrementar">+</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 7 -->
-
-  <div class="section" data-section="7">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🧱</span>
-        <span class="section-title">Sistema y Aplicaciones</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">IMPORTANTE</span>
-        <span class="chevron">▼</span>
+  <!-- STEP 9 -->
+  <div class="step-panel" data-step="9">
+    <div class="step-header"><div class="step-icon">🎯</div><div class="step-header-text"><h2>Tu desafío principal</h2><p>Este último paso es el más importante. Nos ayuda a personalizar el resultado.</p></div></div>
+    <div class="field-group">
+      <label><strong>¿Cuál es el principal problema que querés resolver con este organigrama?</strong></label>
+      <div class="options-grid">
+        <div class="option-card"><input type="radio" name="problema" id="pr-roles" value="Roles poco claros o superpuestos"><label for="pr-roles">🔀 Roles poco claros o superpuestos</label></div>
+        <div class="option-card"><input type="radio" name="problema" id="pr-creci" value="Prepararse para crecer y escalar"><label for="pr-creci">📈 Quiero escalar el negocio</label></div>
+        <div class="option-card"><input type="radio" name="problema" id="pr-delegar" value="Dificultad para delegar"><label for="pr-delegar">🤲 No logro delegar bien</label></div>
+        <div class="option-card"><input type="radio" name="problema" id="pr-comunicacion" value="Problemas de comunicación interna"><label for="pr-comunicacion">💬 Comunicación interna caótica</label></div>
+        <div class="option-card"><input type="radio" name="problema" id="pr-nuevo" value="Ordenar estructura desde cero"><label for="pr-nuevo">🏗️ Ordenar desde cero</label></div>
+        <div class="option-card"><input type="radio" name="problema" id="pr-inversor" value="Presentar estructura a inversores o socios"><label for="pr-inversor">📊 Presentar a inversores / socios</label></div>
       </div>
     </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Mantener iOS siempre actualizado — los exploits de Cellebrite dependen de versiones desactualizadas</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">NO hacer jailbreak — elimina el modelo de seguridad completo de iOS</div>
-          <span class="item-tag tag-critico">crítico</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">No instalar perfiles de configuración desconocidos</div>
-          <div class="item-route">Ajustes → General → VPN y gestión de dispositivos</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Revisar y limitar permisos de apps: Micrófono, Cámara, Ubicación, Contactos, Fotos</div>
-          <div class="item-route">Ajustes → Privacidad y seguridad</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
+    <div class="field-group">
+      <label><strong>Describí brevemente qué esperás lograr</strong> <span style="color:var(--text-muted);font-weight:300">(opcional)</span></label>
+      <textarea id="obs-libre" placeholder="Ej: Necesito que mi equipo entienda quién le reporta a quién, hay mucha confusión cuando surge un problema..."></textarea>
+      <p class="field-hint">Esto aparecerá en las observaciones de tu organigrama.</p>
     </div>
   </div>
 
-  <!-- 8 -->
-
-  <div class="section" data-section="8">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🌐</span>
-        <span class="section-title">Red y Conectividad</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">IMPORTANTE</span>
-        <span class="chevron">▼</span>
-      </div>
-    </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Desactivar conexión automática a WiFi abiertas y olvidar redes desconocidas</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Desactivar Bluetooth cuando no se usa</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">AirDrop: desactivar o limitar solo a Contactos</div>
-          <div class="item-route">Ajustes → General → AirDrop</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-    </div>
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" id="btn-prev" onclick="prevStep()" style="display:none">← Atrás</button>
+    <div></div>
+    <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Continuar →</button>
+    <button class="btn btn-generate" id="btn-generate" onclick="generateOrg()" style="display:none">Generar organigrama →</button>
   </div>
-
-  <!-- 9 -->
-
-  <div class="section" data-section="9">
-    <div class="section-header" onclick="toggleSection(this)">
-      <div class="section-title-wrap">
-        <span class="section-emoji">🔄</span>
-        <span class="section-title">Hábitos Operativos</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px">
-        <span class="section-badge">HÁBITO</span>
-        <span class="chevron">▼</span>
-      </div>
-    </div>
-    <div class="section-body">
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Reiniciar el iPhone regularmente (limpia RAM → vuelve a estado BFU más seguro)</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Eliminar chats sensibles periódicamente. No acumular historial.</div>
-          <span class="item-tag tag-alto">alto impacto</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">No conectar a PCs desconocidas. No cargar en puertos USB públicos.</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-      <div class="item" onclick="toggleItem(this)">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-text">Minimizar datos sensibles almacenados. Borrar ≠ eliminar; priorizar apps con auto-borrado.</div>
-          <span class="item-tag tag-recomendado">recomendado</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-
-  <div class="footer-section">
-    <h3>Los 5 pilares reales de defensa forense</h3>
-
-```
-<div class="pillars-cards">
-
-  <div class="pilar-card">
-    <div class="pilar-num">01</div>
-    <div class="pilar-body">
-      <div class="pilar-title"><span>🔑</span> Código fuerte alfanumérico</div>
-      <div class="pilar-desc">
-        El teléfono guarda todo cifrado, como en una caja fuerte. El código es la llave. Si es corto o solo números, una máquina puede probarlo miles de veces por segundo hasta adivinar. Con una contraseña larga con letras y números, eso se vuelve prácticamente imposible.
-      </div>
-      <div class="pilar-how">
-        <strong>Cómo hacerlo</strong>
-        Ajustes → Face ID y código → Cambiar código → Opciones → Código alfanumérico personalizado → Elegir algo de 10+ caracteres. Ej: <em>miPerro2019!</em>
-      </div>
-    </div>
-  </div>
-
-  <div class="pilar-card">
-    <div class="pilar-num">02</div>
-    <div class="pilar-body">
-      <div class="pilar-title"><span>☁️</span> ADP activado (Protección Avanzada iCloud)</div>
-      <div class="pilar-desc">
-        Todo lo que guardás en iCloud (fotos, mensajes, notas) normalmente Apple lo puede ver y entregar si alguien lo pide. Con esta opción activada, Apple ya no puede ver nada — solo vos tenés la llave. Es el cambio más importante que podés hacer.
-      </div>
-      <div class="pilar-how">
-        <strong>Cómo hacerlo</strong>
-        Ajustes → [tu nombre] → iCloud → Protección de datos avanzada → Activar. Te va a pedir configurar un método de recuperación (guardalo en papel en un lugar seguro).
-      </div>
-    </div>
-  </div>
-
-  <div class="pilar-card">
-    <div class="pilar-num">03</div>
-    <div class="pilar-body">
-      <div class="pilar-title"><span>⚡</span> Apagar el teléfono ante cualquier riesgo</div>
-      <div class="pilar-desc">
-        Cuando el teléfono está prendido y desbloqueado, la información está "abierta" en la memoria. Las herramientas forenses aprovechan ese momento. Si lo apagás completamente, esa información desaparece de la memoria y todo queda cifrado de nuevo. Bloquear la pantalla NO es lo mismo que apagar.
-      </div>
-      <div class="pilar-how">
-        <strong>Cómo hacerlo</strong>
-        Presioná el botón lateral + cualquier botón de volumen al mismo tiempo → aparece la pantalla → deslizá "Apagar". También podés activar Modo Avión primero para cortar toda conexión y después apagar.
-      </div>
-    </div>
-  </div>
-
-  <div class="pilar-card">
-    <div class="pilar-num">04</div>
-    <div class="pilar-body">
-      <div class="pilar-title"><span>💬</span> Signal con mensajes que se autodestruyen</div>
-      <div class="pilar-desc">
-        WhatsApp guarda copias de tus chats. Telegram guarda todo en la nube. Signal es diferente: cifra todo de extremo a extremo y, con la opción de desaparición activada, los mensajes se borran solos después de un tiempo. Si alguien agarra el teléfono, no hay historial que ver.
-      </div>
-      <div class="pilar-how">
-        <strong>Cómo hacerlo</strong>
-        Instalá Signal desde el App Store. Dentro de cada chat → tocá el nombre arriba → Mensajes temporales → elegí 1 semana (o menos). Para activarlo globalmente: Signal → Ajustes → Privacidad → Mensajes temporales por defecto.
-      </div>
-    </div>
-  </div>
-
-  <div class="pilar-card">
-    <div class="pilar-num">05</div>
-    <div class="pilar-body">
-      <div class="pilar-title"><span>🔟</span> Borrado automático tras 10 intentos fallidos</div>
-      <div class="pilar-desc">
-        Si alguien intenta adivinar tu código a la fuerza (probando combinaciones), al décimo intento el teléfono se borra solo. Esto hace que los ataques automáticos de prueba y error sean inútiles. No hay que tener miedo de activarlo: el teléfono te avisa antes del intento 10.
-      </div>
-      <div class="pilar-how">
-        <strong>Cómo hacerlo</strong>
-        Ajustes → Face ID y código → bajar hasta el final → Borrar datos → activar. Listo. No afecta el uso normal del teléfono.
-      </div>
-    </div>
-  </div>
-
 </div>
 
-<div class="complete-message" id="completeMsg">✓ CHECKLIST COMPLETADO — DISPOSITIVO ENDURECIDO</div>
-<button class="share-btn" onclick="copyLink()">📋 Copiar enlace para compartir</button>
-```
-
+<div id="result-page">
+  <div class="result-hero">
+    <div>
+      <h2>Organigrama + Diagnóstico ✓</h2>
+      <p id="result-subtitle">Estructura organizacional · Vista macro</p>
+    </div>
+    <div class="result-actions">
+      <button class="btn-export" onclick="resetForm()">← Reiniciar</button>
+      <button class="btn-export btn-export-solid" onclick="exportHTML()">Exportar HTML</button>
+    </div>
   </div>
-
+  <div class="result-content">
+    <div class="org-wrap">
+      <div class="org-chart" id="org-chart-container"></div>
+    </div>
+    <div id="diagnostico-container"></div>
+    <div class="insights-section" id="insights-section"></div>
+    <div class="observations-box" id="observations-box" style="display:none">
+      <h3><span class="obs-tag">Observaciones del cliente</span></h3>
+      <p id="observations-text"></p>
+    </div>
+  </div>
 </div>
+
+<footer>
+  <p>Desarrollado con <a href="https://ipora.app">ipora.app</a> · Consultoría digital para PyMEs</p>
+  <p style="font-size:12px">Los datos ingresados no se almacenan en ningún servidor.</p>
+</footer>
 
 <script>
-  function toggleSection(header) {
-    const section = header.closest('.section');
-    section.classList.toggle('open');
-  }
+  // ============ STATE ============
+  let currentStep = 1;
+  const totalSteps = 9;
+  const stepNames = ["Información general","Dirección","Marketing","Ventas","Operaciones","Logística","Administración","Post-venta","Tu desafío"];
 
-  function toggleItem(item) {
-    item.classList.toggle('checked');
-    updateProgress();
-  }
-
-  function updateProgress() {
-    const all = document.querySelectorAll('.item');
-    const done = document.querySelectorAll('.item.checked');
-    const total = all.length;
-    const count = done.length;
-    const pct = total ? Math.round((count / total) * 100) : 0;
-
-    document.getElementById('progressCount').textContent = `${count} / ${total}`;
-    document.getElementById('progressBar').style.width = pct + '%';
-
-    const msg = document.getElementById('completeMsg');
-    if (count === total && total > 0) {
-      msg.style.display = 'block';
-    } else {
-      msg.style.display = 'none';
+  function initDots() {
+    const wrap = document.getElementById('steps-dots');
+    wrap.innerHTML = '';
+    for (let i = 1; i <= totalSteps; i++) {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 1 ? ' active' : '');
+      d.id = 'dot-' + i;
+      wrap.appendChild(d);
     }
   }
+  initDots();
 
-  function copyLink() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      const btn = document.querySelector('.share-btn');
-      btn.textContent = '✅ Enlace copiado';
-      setTimeout(() => btn.textContent = '📋 Copiar enlace para compartir', 2000);
-    }).catch(() => {
-      alert('Copiá esta URL: ' + url);
-    });
+  function updateUI() {
+    document.getElementById('step-label').textContent = `Paso ${currentStep} de ${totalSteps}`;
+    document.getElementById('step-name-label').textContent = stepNames[currentStep - 1];
+    document.getElementById('progress-fill').style.width = ((currentStep / totalSteps) * 100) + '%';
+    document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.step-panel[data-step="${currentStep}"]`).classList.add('active');
+    document.getElementById('btn-prev').style.display = currentStep > 1 ? 'inline-block' : 'none';
+    document.getElementById('btn-next').style.display = currentStep < totalSteps ? 'inline-block' : 'none';
+    document.getElementById('btn-generate').style.display = currentStep === totalSteps ? 'inline-block' : 'none';
+    for (let i = 1; i <= totalSteps; i++) {
+      const d = document.getElementById('dot-' + i);
+      d.className = 'dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  // init count
-  updateProgress();
-</script>
+  function nextStep() {
+    // Validación paso 1
+    if (currentStep === 1) {
+      const nombre = document.getElementById('empresa-nombre').value.trim();
+      const rubro = document.getElementById('empresa-rubro').value.trim();
+      const tipo = document.querySelector('input[name="tipo-negocio"]:checked');
+      if (!nombre) { alert('Por favor, ingresa el nombre de la empresa'); return; }
+      if (!rubro) { alert('Por favor, ingresa el rubro / industria'); return; }
+      if (!tipo) { alert('Por favor, selecciona el tipo de negocio'); return; }
+    }
+    if (currentStep < totalSteps) { currentStep++; updateUI(); }
+  }
 
+  function prevStep() { if (currentStep > 1) { currentStep--; updateUI(); } }
+
+  function changeNum(id, delta) {
+    const el = document.getElementById(id);
+    let val = (parseInt(el.value) || 0) + delta;
+    if (id === 'total-empleados') val = Math.max(1, val);
+    else val = Math.max(0, val);
+    el.value = val;
+  }
+
+  function toggleConditional(sectionId, showValue, radioName) {
+    const radios = document.querySelectorAll(`input[name="${radioName}"]`);
+    let selected = '';
+    radios.forEach(r => { if (r.checked) selected = r.value; });
+    const section = document.getElementById(sectionId);
+    if (section) section.classList.toggle('visible', selected === showValue);
+  }
+
+  function collectData() {
+    const d = {};
+    d.nombre = document.getElementById('empresa-nombre').value.trim() || 'Mi Empresa';
+    d.rubro = document.getElementById('empresa-rubro').value.trim() || '';
+    d.totalEmpleados = Math.max(1, parseInt(document.getElementById('total-empleados').value) || 1);
+    const tipoNeg = document.querySelector('input[name="tipo-negocio"]:checked');
+    d.tipoNegocio = tipoNeg ? tipoNeg.value : 'servicios';
+    const dm = document.querySelector('input[name="decision-maker"]:checked');
+    d.decisionMaker = dm ? dm.value : 'Dueño / Fundador';
+    const hj = document.querySelector('input[name="hay-jerarquia"]:checked');
+    d.hayJerarquia = hj ? hj.value : 'informal';
+    const haceMkt = document.querySelector('input[name="hace-mkt"]:checked');
+    d.haceMkt = haceMkt ? haceMkt.value : 'no';
+    d.mktPersonas = Math.max(0, parseInt(document.getElementById('mkt-personas').value) || 0);
+    const respMkt = document.querySelector('input[name="resp-mkt"]:checked');
+    d.respMkt = respMkt ? respMkt.value : 'no';
+    const tieneVentas = document.querySelector('input[name="tiene-ventas"]:checked');
+    d.tieneVentas = tieneVentas ? tieneVentas.value : 'no';
+    d.ventasPersonas = Math.max(0, parseInt(document.getElementById('ventas-personas').value) || 0);
+    const procesoVentas = document.querySelector('input[name="proceso-ventas"]:checked');
+    d.procesoVentas = procesoVentas ? procesoVentas.value : '';
+    d.opPersonas = Math.max(0, parseInt(document.getElementById('op-personas').value) || 0);
+    const logInv = document.querySelector('input[name="log-inventario"]:checked');
+    d.hayLogistica = logInv ? logInv.value : 'no';
+    d.logPersonas = Math.max(0, parseInt(document.getElementById('log-personas').value) || 0);
+    d.admPersonas = Math.max(0, parseInt(document.getElementById('adm-personas').value) || 0);
+    const quienAdm = document.querySelector('input[name="quien-admin"]:checked');
+    d.quienAdmin = quienAdm ? quienAdm.value : 'El dueño';
+    const tienePostventa = document.querySelector('input[name="tiene-postventa"]:checked');
+    d.tienePostventa = tienePostventa ? tienePostventa.value : 'no';
+    d.pvPersonas = Math.max(0, parseInt(document.getElementById('pv-personas').value) || 0);
+    const prob = document.querySelector('input[name="problema"]:checked');
+    d.problema = prob ? prob.value : '';
+    d.obsLibre = document.getElementById('obs-libre').value.trim();
+    return d;
+  }
+
+  // ============ DIAGNÓSTICO INTELIGENTE POR DEPARTAMENTO ============
+  function diagnosticarProblemas(d) {
+    let problemas = [];
+
+    // 1. Ventas
+    if (d.tieneVentas === 'no' && d.totalEmpleados > 3) {
+      problemas.push({
+        dept: 'Ventas',
+        gravedad: 'alta',
+        razon: 'No hay equipo de ventas formal para el tamaño actual de la empresa.',
+        sugerencia: 'Designá al menos una persona responsable de ventas. Documentá un proceso básico (prospección → oferta → cierre).'
+      });
+    } else if (d.tieneVentas === 'si' && d.procesoVentas && (d.procesoVentas === 'informal' || d.procesoVentas === 'no')) {
+      problemas.push({
+        dept: 'Ventas',
+        gravedad: 'media',
+        razon: 'El equipo de ventas trabaja sin un proceso documentado.',
+        sugerencia: 'Creá un pipeline simple con etapas: contacto → calificación → propuesta → cierre → seguimiento.'
+      });
+    } else if (d.tieneVentas === 'si' && d.ventasPersonas === 1 && d.totalEmpleados > 5) {
+      problemas.push({
+        dept: 'Ventas',
+        gravedad: 'media',
+        razon: 'Un solo vendedor para una empresa de más de 5 personas puede ser insuficiente.',
+        sugerencia: 'Evaluá sumar un asistente de ventas o externalizar la prospección.'
+      });
+    }
+
+    // 2. Marketing
+    if (d.haceMkt === 'no' && d.totalEmpleados > 2) {
+      problemas.push({
+        dept: 'Marketing',
+        gravedad: 'media',
+        razon: 'No hay acciones de marketing para atraer clientes.',
+        sugerencia: 'Destiná al menos 2-4 horas semanales a redes sociales o email marketing. O contratá una agencia pequeña.'
+      });
+    } else if (d.haceMkt === 'si' && d.mktPersonas === 0 && d.totalEmpleados > 4) {
+      problemas.push({
+        dept: 'Marketing',
+        gravedad: 'media',
+        razon: 'Hacés marketing pero nadie está formalmente asignado.',
+        sugerencia: 'Designá un responsable de marketing (aunque sea part-time). La consistencia es clave.'
+      });
+    }
+
+    // 3. Operaciones
+    if (d.opPersonas === 1 && (d.ventasPersonas > 2 || d.totalEmpleados > 6)) {
+      problemas.push({
+        dept: 'Operaciones',
+        gravedad: 'alta',
+        razon: 'Una sola persona en operaciones no puede dar abasto con el volumen actual.',
+        sugerencia: 'Evaluá contratar asistente operativo o automatizar tareas repetitivas (agendas, facturación).'
+      });
+    } else if (d.opPersonas === 0 && d.totalEmpleados > 2) {
+      problemas.push({
+        dept: 'Operaciones',
+        gravedad: 'alta',
+        razon: 'No hay nadie dedicado a operaciones, puede generar demoras y errores.',
+        sugerencia: 'Asigná una persona como responsable de entregas / producción, aunque sea compartido.'
+      });
+    }
+
+    // 4. Administración
+    if (d.admPersonas === 0 && d.totalEmpleados > 3) {
+      problemas.push({
+        dept: 'Administración',
+        gravedad: 'media',
+        razon: 'No hay gestión administrativa dedicada. El dueño probablemente pierde tiempo en tareas operativas.',
+        sugerencia: 'Implementá herramientas de facturación (ej. Alegra, Contpaqi) y delegá cobros/pagos a un asistente.'
+      });
+    } else if (d.admPersonas === 1 && d.totalEmpleados > 8) {
+      problemas.push({
+        dept: 'Administración',
+        gravedad: 'media',
+        razon: 'Una sola persona administrando todo puede ser cuello de botella.',
+        sugerencia: 'Revisá si podés tercerizar liquidaciones o sumar un software de RRHH.'
+      });
+    }
+
+    // 5. Post-venta
+    if (d.tienePostventa === 'no' && d.totalEmpleados > 3) {
+      problemas.push({
+        dept: 'Post-venta',
+        gravedad: 'baja',
+        razon: 'No hay seguimiento post-venta, se pierde oportunidad de recompra y referidos.',
+        sugerencia: 'Creá un flujo simple: email de agradecimiento, encuesta de satisfacción y pedido de reseña.'
+      });
+    }
+
+    // 6. Jerarquía
+    if (d.hayJerarquia === 'no' || d.hayJerarquia === 'informal') {
+      problemas.push({
+        dept: 'Dirección',
+        gravedad: 'alta',
+        razon: 'La estructura jerárquica es informal o inexistente. Nadie sabe a quién reportar.',
+        sugerencia: 'Definí organigrama simple con 3-4 áreas y comunicá las líneas de reporte a todo el equipo.'
+      });
+    }
+
+    if (problemas.length === 0) {
+      return { principal: null, mensaje: '✅ ¡Excelente! La estructura parece equilibrada. Seguí monitoreando a medida que crezcas.' };
+    }
+
+    const prioridad = { alta: 3, media: 2, baja: 1 };
+    problemas.sort((a,b) => prioridad[b.gravedad] - prioridad[a.gravedad]);
+    const principal = problemas[0];
+
+    return { principal: principal.dept, razon: principal.razon, sugerencia: principal.sugerencia, todos: problemas };
+  }
+
+  // ============ BUILD DEPARTMENTS ============
+  function buildDepts(d) {
+    const depts = [];
+    depts.push({ icon: '🧠', name: 'Dirección', count: 1, subareas: [] });
+    if (d.haceMkt === 'si') {
+      const subs = [];
+      if (document.getElementById('mkt-redes')?.checked) subs.push('Redes sociales');
+      if (document.getElementById('mkt-ads')?.checked) subs.push('Publicidad paga');
+      if (document.getElementById('mkt-email')?.checked) subs.push('Email marketing');
+      depts.push({ icon: '📣', name: 'Marketing', count: d.mktPersonas || 1, subareas: subs.slice(0,2) });
+    }
+    if (d.tieneVentas === 'si') {
+      const subs = [];
+      if (document.getElementById('v-presencial')?.checked) subs.push('Presencial');
+      if (document.getElementById('v-online')?.checked) subs.push('Online');
+      if (document.getElementById('v-whatsapp')?.checked) subs.push('WhatsApp');
+      depts.push({ icon: '💰', name: 'Ventas', count: d.ventasPersonas || 1, subareas: subs.slice(0,2) });
+    }
+    const opSubs = [];
+    if (document.getElementById('rol-tecnico')?.checked) opSubs.push('Técnicos');
+    if (document.getElementById('rol-especialista')?.checked) opSubs.push('Especialistas');
+    if (document.getElementById('rol-produccion')?.checked) opSubs.push('Producción');
+    depts.push({ icon: '⚙️', name: 'Operaciones', count: d.opPersonas || 1, subareas: opSubs.slice(0,2) });
+    if (d.hayLogistica === 'si') {
+      const subs = [];
+      if (document.getElementById('log-env-si')?.checked) subs.push('Envíos');
+      subs.push('Inventario');
+      depts.push({ icon: '📦', name: 'Logística', count: d.logPersonas || 1, subareas: subs.slice(0,2) });
+    }
+    const admSubs = [];
+    if (document.getElementById('adm-cobros')?.checked) admSubs.push('Cobros');
+    if (document.getElementById('adm-pagos')?.checked) admSubs.push('Pagos');
+    if (document.getElementById('adm-facturacion')?.checked) admSubs.push('Facturación');
+    if (document.getElementById('adm-rrhh')?.checked) admSubs.push('RRHH');
+    depts.push({ icon: '🧾', name: 'Administración', count: d.admPersonas || 1, subareas: admSubs.slice(0,2) });
+    if (d.tienePostventa === 'si') {
+      const subs = [];
+      if (document.getElementById('pv-wsp')?.checked) subs.push('WhatsApp');
+      if (document.getElementById('pv-email-ch')?.checked) subs.push('Email');
+      depts.push({ icon: '🤝', name: 'Atención al cliente', count: d.pvPersonas || 1, subareas: subs.slice(0,2) });
+    }
+    return depts;
+  }
+
+  function renderOrgChart(d, depts) {
+    const container = document.getElementById('org-chart-container');
+    container.innerHTML = `
+      <div class="org-ceo">
+        <span class="company-name">${escHtml(d.nombre)}</span>
+        <span class="ceo-role">${escHtml(d.decisionMaker)}</span>
+      </div>
+      <div class="connector-v"></div>
+    `;
+    const deptRow = depts.filter(dep => dep.name !== 'Dirección');
+    const row = document.createElement('div');
+    row.className = 'dept-row';
+    deptRow.forEach(dept => {
+      const col = document.createElement('div');
+      col.className = 'dept-col';
+      let subHTML = '';
+      if (dept.subareas && dept.subareas.length) {
+        subHTML = '<div class="subareas">';
+        dept.subareas.forEach(s => { subHTML += `<div class="subarea-connector"></div><div class="subarea-node">${escHtml(s)}</div>`; });
+        subHTML += '</div>';
+      }
+      col.innerHTML = `
+        <div class="dept-node">
+          <span class="dept-icon">${dept.icon}</span>
+          <span class="dept-name">${escHtml(dept.name)}</span>
+          <span class="dept-count">${dept.count} persona${dept.count !== 1 ? 's' : ''}</span>
+        </div>
+        ${subHTML}
+      `;
+      row.appendChild(col);
+    });
+    container.appendChild(row);
+  }
+
+  function renderDiagnostico(diagnostico) {
+    const container = document.getElementById('diagnostico-container');
+    if (!diagnostico.principal) {
+      container.innerHTML = `<div class="diagnostico-card" style="border-left-color: #16a34a;"><h3>✅ Diagnóstico general</h3><p>${diagnostico.mensaje}</p></div>`;
+      return;
+    }
+    container.innerHTML = `
+      <div class="diagnostico-card">
+        <h3>🔍 Departamento con mayor problema detectado</h3>
+        <div class="dept-highlight">${escHtml(diagnostico.principal)}</div>
+        <div class="razon">${escHtml(diagnostico.razon)}</div>
+        <div class="sugerencia">💡 Sugerencia: ${escHtml(diagnostico.sugerencia)}</div>
+      </div>
+    `;
+  }
+
+  function generateInsights(d, depts) {
+    const insights = [];
+    if (!d.haceMkt || d.haceMkt === 'no') insights.push({ type: 'warn', text: 'No hay área de marketing activa. Considerá al menos un responsable de comunicación.' });
+    if (d.hayJerarquia === 'no' || d.hayJerarquia === 'informal') insights.push({ type: 'warn', text: 'La jerarquía es informal. Definir líneas de reporte ayudará a delegar.' });
+    if (d.tieneVentas === 'no') insights.push({ type: 'tip', text: 'Sin equipo de ventas, el crecimiento depende del dueño. Documentá un proceso básico.' });
+    if (d.admPersonas <= 1 && d.totalEmpleados > 5) insights.push({ type: 'tip', text: 'Administración con 1 persona puede ser cuello de botella. Evaluá automatizar.' });
+    if (d.tienePostventa === 'no') insights.push({ type: 'warn', text: 'Sin post-venta, perdés recompra y referidos. Es una de las áreas con mejor ROI.' });
+    if (insights.length === 0) insights.push({ type: 'ok', text: 'Estructura completa. Todos los departamentos clave están cubiertos.' });
+    const section = document.getElementById('insights-section');
+    let html = `<h3>🔎 Observaciones de estructura</h3><div class="insight-cards">`;
+    insights.forEach(ins => {
+      const label = ins.type === 'warn' ? '⚠ Atención' : ins.type === 'ok' ? '✓ OK' : '💡 Sugerencia';
+      html += `<div class="insight-card"><div class="i-type ${ins.type}">${label}</div><p>${ins.text}</p></div>`;
+    });
+    html += '</div>';
+    section.innerHTML = html;
+  }
+
+  function generateOrg() {
+    const d = collectData();
+    const depts = buildDepts(d);
+    const diagnostico = diagnosticarProblemas(d);
+
+    document.getElementById('result-subtitle').textContent = `${escHtml(d.nombre)} · ${d.totalEmpleados} personas · ${d.rubro || d.tipoNegocio}`;
+    renderOrgChart(d, depts);
+    renderDiagnostico(diagnostico);
+    generateInsights(d, depts);
+
+    const obsText = [d.problema ? `Problema a resolver: ${d.problema}` : '', d.obsLibre].filter(Boolean).join('\n');
+    const obsBox = document.getElementById('observations-box');
+    if (obsText.trim()) {
+      document.getElementById('observations-text').textContent = obsText;
+      obsBox.style.display = 'block';
+    } else {
+      obsBox.style.display = 'none';
+    }
+    document.getElementById('wizard-wrap').style.display = 'none';
+    document.getElementById('main-hero').style.display = 'none';
+    document.getElementById('result-page').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function exportHTML() {
+    const orgHTML = document.getElementById('org-chart-container').outerHTML;
+    const diagnosticoHTML = document.getElementById('diagnostico-container').innerHTML;
+    const insightsHTML = document.getElementById('insights-section').innerHTML;
+    const obsHTML = document.getElementById('observations-box').style.display !== 'none' ? document.getElementById('observations-box').outerHTML : '';
+    const empresa = document.getElementById('empresa-nombre').value.trim() || 'Mi Empresa';
+    const html = `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Organigrama · ${empresa}</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root{--accent:#1a1a2e;--accent2:#2d4a8a;--highlight:#e05c2a;--text:#1a1a1a;--text-muted:#777770;--border:#e0e0d8;--bg:#fff;--bg2:#f5f5f0;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Lato',sans-serif;font-size:17px;font-weight:300;background:#fff;color:var(--text);padding:40px 24px 80px}
+  .org-wrap{overflow-x:auto;padding:16px 0 32px}
+  .org-chart{display:flex;flex-direction:column;align-items:center;gap:0;min-width:640px}
+  .org-ceo{background:var(--accent);color:#fff;padding:16px 40px;border-radius:4px;font-family:'Syne',sans-serif;font-weight:700;font-size:16px;text-align:center;min-width:200px}
+  .org-ceo .company-name{font-size:20px;font-weight:800;display:block;margin-bottom:2px}
+  .org-ceo .ceo-role{font-size:12px;font-weight:400;color:rgba(255,255,255,0.6);letter-spacing:1.5px;text-transform:uppercase}
+  .connector-v{width:2px;height:32px;background:var(--border);margin:0 auto}
+  .dept-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;padding-top:32px}
+  .dept-col{display:flex;flex-direction:column;align-items:center;gap:0}
+  .dept-col::before{content:'';width:2px;height:32px;background:var(--border);display:block}
+  .dept-node{border:2px solid var(--accent);background:#fff;border-radius:4px;padding:14px 22px;text-align:center;min-width:150px;max-width:180px}
+  .dept-node .dept-icon{font-size:22px;display:block;margin-bottom:6px}
+  .dept-node .dept-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;color:var(--accent);display:block;margin-bottom:4px}
+  .dept-node .dept-count{font-size:12px;color:var(--text-muted);display:flex;align-items:center;justify-content:center;gap:4px;font-weight:400}
+  .dept-node .dept-count::before{content:'';display:inline-block;width:6px;height:6px;background:var(--highlight);border-radius:50%}
+  .subareas{display:flex;flex-direction:column;gap:8px;margin-top:0;align-items:center}
+  .subarea-connector{width:2px;height:16px;background:var(--border)}
+  .subarea-node{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:8px 14px;font-size:13px;color:var(--text-muted);text-align:center;min-width:140px;max-width:170px}
+  .diagnostico-card{background:#fff8f0;border-left:5px solid var(--highlight);border-radius:8px;padding:28px 32px;margin:20px 0 32px}
+  .diagnostico-card h3{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;color:var(--accent);margin-bottom:8px}
+  .dept-highlight{background:var(--highlight);color:#fff;padding:4px 12px;border-radius:30px;display:inline-block;margin:12px 0 8px}
+  .razon{font-size:16px;font-weight:500;margin:12px 0 8px}
+  .sugerencia{background:#f0f4ff;padding:12px 16px;border-radius:6px;margin-top:12px;color:var(--accent2)}
+  .insights-section{margin-top:32px}
+  .insights-section h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--accent);margin-bottom:16px}
+  .insight-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .insight-card{background:#fff;border:1px solid var(--border);border-radius:4px;padding:18px 20px}
+  .insight-card .i-type{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+  .i-type.warn{color:#d97706}.i-type.ok{color:#16a34a}.i-type.tip{color:var(--accent2)}
+  .insight-card p{font-size:14px;color:var(--text);line-height:1.5;font-weight:300}
+  .observations-box{margin-top:40px;padding:28px 32px;background:var(--bg2);border-left:4px solid var(--highlight);border-radius:0 4px 4px 0}
+  .observations-box h3{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--accent);margin-bottom:12px}
+  .obs-tag{background:var(--highlight);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:2px}
+  header{margin-bottom:40px;padding-bottom:24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+  .logo{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--accent)}
+  .logo span{color:var(--highlight)}
+</style>
+</head>
+<body>
+<header><div class="logo">ipora<span>.</span></div><small style="color:#777770">Organigrama generado automáticamente</small></header>
+<div class="org-wrap"><div class="org-chart">${orgHTML.replace(/<div class="org-chart" [^>]*>/, '').replace(/<\/div>\s*$/, '')}</div></div>
+${diagnosticoHTML}
+<div class="insights-section"><h3>Observaciones de estructura</h3><div class="insight-cards">${insightsHTML.replace(/<h3>[^<]*<\/h3>/, '').replace(/<div class="insight-cards">/, '').replace(/<\/div>\s*$/, '')}</div></div>
+${obsHTML}
+</body></html>`;
+    const blob = new Blob([html], { type: 'text/html' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `organigrama-${empresa.toLowerCase().replace(/\s+/g,'-')}.html`;
+    a.click();
+  }
+
+  function resetForm() {
+    document.getElementById('result-page').style.display = 'none';
+    document.getElementById('wizard-wrap').style.display = 'block';
+    document.getElementById('main-hero').style.display = 'block';
+    currentStep = 1;
+    updateUI();
+  }
+
+  function escHtml(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Inicializar condicionales al cargar (por si hay radios preseleccionados)
+  window.addEventListener('DOMContentLoaded', () => {
+    // Forzar actualización de condicionales
+    const mktRadio = document.querySelector('input[name="hace-mkt"]:checked');
+    if (mktRadio) toggleConditional('mkt-detail', 'si', 'hace-mkt');
+    const ventasRadio = document.querySelector('input[name="tiene-ventas"]:checked');
+    if (ventasRadio) toggleConditional('ventas-detail', 'si', 'tiene-ventas');
+    const logRadio = document.querySelector('input[name="log-inventario"]:checked');
+    if (logRadio) toggleConditional('log-detail', 'si', 'log-inventario');
+    const pvRadio = document.querySelector('input[name="tiene-postventa"]:checked');
+    if (pvRadio) toggleConditional('pv-detail', 'si', 'tiene-postventa');
+  });
+</script>
 </body>
 </html>
